@@ -149,6 +149,7 @@
       <column name="Emballasjetype" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
       <column name="Korktype" sqlType="VARCHAR" precision="14" scale="0" nullable="true" jdbcType="12"/>
       <column name="Vareurl" sqlType="VARCHAR" precision="61" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Enhetspris" sqlType="DECIMAL" precision="7" scale="2" nullable="true" jdbcType="3"/>
       <primary-key name="PRIMARY" columns="Varenummer"/>
     </table>
   </data-source>

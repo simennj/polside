@@ -1,0 +1,16 @@
+.content {
+    margin-top: 50px;
+}
+
+.navbar {
+    background: #161616;
+}
+
+.navbar a {
+    color: #fcfcfc;
+    background-color: inherit;
+}
+
+.navbar li > a:hover {
+    background-color: #222222;
+}
