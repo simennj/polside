@@ -1,10 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
 <table class="table table-striped">
     <thead><tr>
-        <th>navn</th>
-        <th>type</th>
-        <th>alkohol</th>
-        <th>volum</th>
-        <th>alkhol/krone</th>
+        <th>Navn</th>
+        <th>Type</th>
+        <th>Alkohol</th>
+        <th>Volum</th>
+        <th>Alkhol/krone</th>
     </tr></thead>
     <tbody>
     {% for produkt in toppliste %}
@@ -18,3 +21,5 @@
     {% endfor %}
     </tbody>
 </table>
+
+{% endblock content %}
