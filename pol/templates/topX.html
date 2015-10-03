@@ -1,6 +1,20 @@
-{{ toppliste }}
-<ul>
+<table class="table table-striped">
+    <thead><tr>
+        <th>navn</th>
+        <th>type</th>
+        <th>alkohol</th>
+        <th>volum</th>
+        <th>alkhol/krone</th>
+    </tr></thead>
+    <tbody>
     {% for produkt in toppliste %}
-    <li><a href="/pol/produkt/{{ produkt.varenummer }}"><span>{{ produkt.varenavn }}</span><span>{{ produkt.volum }}</span><span>{{ produkt.pris }}</span><span>{{ produkt.alkohol }}</span><span>{{ produkt.enhetspris }}</span></a></li>
+        <tr>
+            <td>{{ produkt.varenavn }}</td>
+            <td>{{ produkt.varetype }}</td>
+            <td>{{ produkt.alkohol }}</td>
+            <td>{{ produkt.volum }}</td>
+            <td>{{ produkt.enhetspris }}</td>
+        </tr>
     {% endfor %}
-</ul>
+    </tbody>
+</table>

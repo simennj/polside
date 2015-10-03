@@ -8,8 +8,6 @@ def index(request):
 
 def topX(request, x):
     toppliste = Produkter.objects.filter(produktutvalg='Basisutvalget').order_by('enhetspris')[:int(x)]
-        #get_list_or_404(Produkter, produktutvalg='Basisutvalget')[:int(x)]
-    #output = ', '.join(["%.2f" % p.pris_per_enhet() for p in toppliste])
     return render(request, 'topX.html', {
         'toppliste': toppliste,
     })
