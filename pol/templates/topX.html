@@ -1,0 +1,6 @@
+{{ toppliste }}
+<ul>
+    {% for produkt in toppliste %}
+    <li><a href="/pol/produkt/{{ produkt.varenummer }}"><span>{{ produkt.varenavn }}</span><span>{{ produkt.volum }}</span><span>{{ produkt.pris }}</span><span>{{ produkt.alkohol }}</span><span>{{ produkt.enhetspris }}</span></a></li>
+    {% endfor %}
+</ul>

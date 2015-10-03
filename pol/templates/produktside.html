@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <title>{{ produktinfo.varenavn }}</title>
+    {% if produktid %}
+        <ul>
+            <li>
+                <h1><a href="{{ produktinfo.vareurl }}">{{ produktinfo.varenavn }}</a></h1>
+            </li>
+            <li>
+                {{ produktinfo.enhetspris }}
+            </li>
+        </ul>
+    {% endif %}
+{% endblock content %}
