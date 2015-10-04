@@ -14,3 +14,17 @@
 .navbar li > a:hover {
     background-color: #222222;
 }
+
+.sidebar {
+}
+
+.filterform {
+}
+
+.filterform span {
+    display: none;
+}
+
+.filterform input {
+    float: right;
+}

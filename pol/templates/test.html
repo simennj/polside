@@ -1,0 +1,22 @@
+<table class="table table-striped">
+    <thead><tr>
+        <th><label for="id_o_">Navn</label></th>
+        <th><label for="id_o_">Type</label></th>
+        <th><label for="id_o_1">Pris</label></th>
+        <th id="asdf"><label for="id_o_2">Volum</label></th>
+        <th><label for="id_o_3">Alkohol</label></th>
+        <th><label for="id_o_0">Alkhol/kr</label></th>
+    </tr></thead>
+    <tbody>
+    {% for produkt in filter %}
+        <tr>
+            <td>{{ produkt.varenavn }}</td>
+            <td>{{ produkt.varetype }}</td>
+            <td>{{ produkt.pris }}.-</td>
+            <td>{{ produkt.volum }}cl</td>
+            <td>{{ produkt.alkohol }}%</td>
+            <td>{{ produkt.enhetspris }}ml</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

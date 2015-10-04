@@ -1,14 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <title>{{ produktinfo.varenavn }}</title>
-    {% if produktid %}
-        <ul>
-            <li>
-                <h1><a href="{{ produktinfo.vareurl }}">{{ produktinfo.varenavn }}</a></h1>
-            </li>
-            <li>
-                {{ produktinfo.enhetspris }}
-            </li>
-        </ul>
-    {% endif %}
+    <div class="page-header">
+        <h1><a href="{{ produktinfo.vareurl }}">{{ object.varenavn }}</a></h1>
+    </div>
+    {{ pobject.enhetspris }}
 {% endblock content %}

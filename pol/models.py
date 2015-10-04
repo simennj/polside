@@ -1,15 +1,8 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
-#
-# Also note: You'll have to insert the output of 'django-admin sqlcustom [app_label]'
-# into your database.
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.db import models
+import django_filters
 
 
 class Produkter(models.Model):
@@ -53,6 +46,7 @@ class Produkter(models.Model):
 
     class Meta:
         db_table = 'produkter'
+#        ordering = ('enhetspris',)
 
     def save(self, *args, **kwargs):
         self.enhetspris = self.pris_per_enhet()
@@ -64,5 +58,93 @@ class Produkter(models.Model):
     def pris_per_enhet(self):
         if self.alkohol > 0:
             return self.literpris/self.alkohol
-        return 9001
+        return 9000.01
 
+
+class ProduktFilter(django_filters.FilterSet):
+    CHOICES =(
+        ('Rødvin', 'Rødvin'),
+        ('Hvitvin', 'Hvitvin'),
+        ('Musserende Vin', 'Musserende Vin'),
+        ('Øl', 'Øl'),
+        ('Whisky', 'Whisky'),
+        ('Druebrennevin', 'Druebrennevin'),
+        ('Rosévin', 'Rosévin'),
+        ('Akevitt', 'Akevitt'),
+        ('Likør', 'Likør'),
+        ('Vodka', 'Vodka'),
+        ('Likør under 22 %', 'Likør under 22 %'),
+        ('Portvin', 'Portvin'),
+        ('Rom', 'Rom'),
+        ('Fruktbrennevin', 'Fruktbrennevin'),
+        ('Gin', 'Gin'),
+        ('Øvrig Brennevin', 'Øvrig Brennevin'),
+        ('Fruktvin', 'Fruktvin'),
+        ('Øvrig Sterkvin', 'Øvrig Sterkvin'),
+        ('Øvrig Brennevin under 22 %', 'Øvrig Brennevin under 22 %'),
+        ('Bitter', 'Bitter'),
+        ('Aromatisert Svakvin og annen blandet dri', 'Aromatisert Svakvin og annen blandet dri'),
+        ('Sherry', 'Sherry'),
+        ('Alkoholfritt', 'Alkoholfritt'),
+        ('Vermut', 'Vermut'),
+        ('Madeira', 'Madeira'),
+        ('Bitter under 22 %', 'Bitter under 22 %'),
+        ('Aromatisert Sterkvin', 'Aromatisert Sterkvin'),
+        ('Musserende Fruktvin', 'Musserende Fruktvin'),
+        ('Genever', 'Genever'),
+        ('Øvrig Svakvin', 'Øvrig Svakvin'),
+    )
+    model = Produkter
+    varetype = django_filters.MultipleChoiceFilter(choices=CHOICES)
+    varenavn = django_filters.CharFilter(lookup_type='icontains')
+    pris = django_filters.RangeFilter()
+    volum = django_filters.RangeFilter()
+    alkohol = django_filters.RangeFilter()
+    enhetspris = django_filters.RangeFilter()
+
+    class Meta:
+        fields = (
+            'varenavn',
+            'varetype',
+            'pris',
+            'volum',
+            'alkohol',
+            'enhetspris',
+        )
+        order_by = (
+            'varenavn',
+            'varetype',
+            'pris',
+            'volum',
+            'alkohol',
+            'enhetspris',
+        )
+
+
+class Butikker(models.Model):
+    datotid = models.CharField(db_column='Datotid', max_length=19, blank=True, null=True)
+    butikknavn = models.CharField(db_column='Butikknavn', max_length=31, blank=True, null=True)
+    gateadresse = models.CharField(db_column='Gateadresse', max_length=37, blank=True, null=True)
+    gate_postnummer = models.IntegerField(db_column='Gate_postnummer', blank=True, null=True)
+    gate_poststed = models.CharField(db_column='Gate_poststed', max_length=17, blank=True, null=True)
+    postadresse = models.CharField(db_column='Postadresse', max_length=37, blank=True, null=True)
+    post_postnummer = models.IntegerField(db_column='Post_postnummer', blank=True, null=True)
+    post_poststed = models.CharField(db_column='Post_poststed', max_length=17, blank=True, null=True)
+    telefonnummer = models.IntegerField(db_column='Telefonnummer', blank=True, null=True)
+    kategori = models.CharField(db_column='Kategori', max_length=10, blank=True, null=True)
+    gps_breddegrad = models.DecimalField(db_column='GPS_breddegrad', max_digits=12, decimal_places=10, blank=True, null=True)
+    gps_lengdegrad = models.DecimalField(db_column='GPS_lengdegrad', max_digits=12, decimal_places=11, blank=True, null=True)
+    ukenummer = models.IntegerField(db_column='Ukenummer', blank=True, null=True)
+    apn_mandag = models.CharField(db_column='Apn_mandag', max_length=11, blank=True, null=True)
+    apn_tirsdag = models.CharField(db_column='Apn_tirsdag', max_length=11, blank=True, null=True)
+    apn_onsdag = models.CharField(db_column='Apn_onsdag', max_length=11, blank=True, null=True)
+    apn_torsdag = models.CharField(db_column='Apn_torsdag', max_length=11, blank=True, null=True)
+    apn_fredag = models.CharField(db_column='Apn_fredag', max_length=11, blank=True, null=True)
+    apn_lordag = models.CharField(db_column='Apn_lordag', max_length=11, blank=True, null=True)
+    ukenummer_neste = models.IntegerField(db_column='Ukenummer_neste', blank=True, null=True)
+    apn_neste_mandag = models.CharField(db_column='Apn_neste_mandag', max_length=11, blank=True, null=True)
+    apn_neste_tirsdag = models.CharField(db_column='Apn_neste_tirsdag', max_length=11, blank=True, null=True)
+    apn_neste_onsdag = models.CharField(db_column='Apn_neste_onsdag', max_length=11, blank=True, null=True)
+    apn_neste_torsdag = models.CharField(db_column='Apn_neste_torsdag', max_length=11, blank=True, null=True)
+    apn_neste_fredag = models.CharField(db_column='Apn_neste_fredag', max_length=11, blank=True, null=True)
+    apn_neste_lordag = models.CharField(db_column='Apn_neste_lordag', max_length=11, blank=True, null=True)

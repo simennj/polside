@@ -1,0 +1,5 @@
+kartoversikt
+sammenligningsside
+trykke på header i table for å skjule/vise (javascript)
+rader er linker til produktet
+varetypekategorier
