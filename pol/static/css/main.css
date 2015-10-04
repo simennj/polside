@@ -28,3 +28,7 @@
 .filterform input {
     float: right;
 }
+
+.filterform .errorlist {
+    display: none;
+}
