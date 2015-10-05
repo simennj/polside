@@ -68,7 +68,7 @@ class SorteringsForm(forms.Form):
     CHOICES = (
         ('enhetspris', 'enhetspris'),
         ('alkohol', 'alkohol'),
-        ('volum', 'volum'),
+        ('-volum', 'volum'),
         ('pris', 'pris'),
         ('varetype', 'varetype'),
         ('varenavn', 'varenavn'),

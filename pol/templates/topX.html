@@ -5,9 +5,9 @@
     <thead><tr>
         <th>Navn</th>
         <th>Type</th>
-        <th>Alkohol</th>
+        <th>Alkoholprosent</th>
         <th>Volum</th>
-        <th>Alkhol/krone</th>
+        <th>Alkoholmengde</th>
     </tr></thead>
     <tbody>
     {% for produkt in toppliste %}
@@ -16,7 +16,7 @@
             <td>{{ produkt.varetype }}</td>
             <td>{{ produkt.alkohol }} %</td>
             <td>{{ produkt.volum }} cl</td>
-            <td>{{ produkt.enhetspris }} ml</td>
+            <td>{{ produkt.enhetspris }} kr/ml</td>
         </tr>
     {% endfor %}
     </tbody>

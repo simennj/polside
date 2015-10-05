@@ -31,7 +31,7 @@ $(document).ready(function(){
         <th><label for="id_o_3">Pris</label></th>
         <th id="asdf"><label for="id_o_2">Volum</label></th>
         <th><label for="id_o_1">Alkohol</label></th>
-        <th><label for="id_o_0">Alkohol/kr</label></th>
+        <th><label for="id_o_0">Pris/ml</label></th>
     </tr></thead>
     <tbody>
     {% for produkt in filter %}
@@ -39,9 +39,9 @@ $(document).ready(function(){
             <td>{{ produkt.varenavn }}</td>
             <td>{{ produkt.varetype }}</td>
             <td>{{ produkt.pris }}.-</td>
-            <td>{{ produkt.volum }}cl</td>
+            <td>{{ produkt.volum }}l</td>
             <td>{{ produkt.alkohol }}%</td>
-            <td>{{ produkt.enhetspris }}ml</td>
+            <td>{{ produkt.enhetspris }}kr</td>
         </tr>
     {% endfor %}
     </tbody>

@@ -152,5 +152,45 @@
       <column name="Enhetspris" sqlType="DECIMAL" precision="7" scale="2" nullable="true" jdbcType="3"/>
       <primary-key name="PRIMARY" columns="Varenummer"/>
     </table>
+    <table name="produkter_backup" schema="" catalog="simennje_pol" type="TABLE">
+      <column name="Datotid" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="Varenummer" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Varenavn" sqlType="VARCHAR" precision="80" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Volum" sqlType="DECIMAL" precision="4" scale="2" nullable="true" jdbcType="3"/>
+      <column name="Pris" sqlType="DECIMAL" precision="7" scale="2" nullable="true" jdbcType="3"/>
+      <column name="Literpris" sqlType="DECIMAL" precision="7" scale="2" nullable="true" jdbcType="3"/>
+      <column name="Varetype" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Produktutvalg" sqlType="VARCHAR" precision="19" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Butikkategori" sqlType="VARCHAR" precision="19" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Fylde" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Friskhet" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Garvestoffer" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Bitterhet" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Sodme" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Farge" sqlType="VARCHAR" precision="62" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Lukt" sqlType="VARCHAR" precision="95" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Smak" sqlType="VARCHAR" precision="102" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Passertil01" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Passertil02" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Passertil03" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Land" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Distrikt" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Underdistrikt" sqlType="VARCHAR" precision="22" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Argang" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Rastoff" sqlType="VARCHAR" precision="124" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Metode" sqlType="VARCHAR" precision="205" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Alkohol" sqlType="DECIMAL" precision="4" scale="2" nullable="true" jdbcType="3"/>
+      <column name="Sukker" sqlType="VARCHAR" precision="6" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Syre" sqlType="VARCHAR" precision="6" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Lagringsgrad" sqlType="VARCHAR" precision="39" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Produsent" sqlType="VARCHAR" precision="33" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Grossist" sqlType="VARCHAR" precision="33" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Distributor" sqlType="VARCHAR" precision="31" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Emballasjetype" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Korktype" sqlType="VARCHAR" precision="14" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Vareurl" sqlType="VARCHAR" precision="61" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Enhetspris" sqlType="DECIMAL" precision="7" scale="2" nullable="true" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="Varenummer"/>
+    </table>
   </data-source>
 </component>

@@ -115,7 +115,7 @@ class ProduktFilter(django_filters.FilterSet):
             'varenavn',
             'varetype',
             'pris',
-            'volum',
+            '-volum',
             'alkohol',
             'enhetspris',
         )
