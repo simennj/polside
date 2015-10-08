@@ -46,7 +46,6 @@ class Produkter(models.Model):
 
     class Meta:
         db_table = 'produkter'
-#        ordering = ('enhetspris',)
 
     def save(self, *args, **kwargs):
         self.enhetspris = self.pris_per_enhet()
@@ -112,12 +111,16 @@ class ProduktFilter(django_filters.FilterSet):
             'enhetspris',
         )
         order_by = (
+            'enhetspris',
+            '-enhetspris',
             'varenavn',
             'varetype',
             'pris',
+            '-pris',
+            'volum',
             '-volum',
             'alkohol',
-            'enhetspris',
+            '-alkohol',
         )
 
 

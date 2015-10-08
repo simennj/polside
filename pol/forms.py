@@ -67,9 +67,13 @@ class EnhetsprisForm(forms.Form):
 class SorteringsForm(forms.Form):
     CHOICES = (
         ('enhetspris', 'enhetspris'),
+        ('-enhetspris', '-enhetspris'),
         ('alkohol', 'alkohol'),
-        ('-volum', 'volum'),
+        ('-alkohol', '-alkohol'),
+        ('volum', 'volum'),
+        ('-volum', '-volum'),
         ('pris', 'pris'),
+        ('-pris', '-pris'),
         ('varetype', 'varetype'),
         ('varenavn', 'varenavn'),
     )
