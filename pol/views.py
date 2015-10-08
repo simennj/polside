@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, get_object_or_404, get_list_or_404, render_to_response
+from django.shortcuts import render, render_to_response
 from django.views import generic
-from rest_framework import viewsets
-from serializers import *
+
 from pol.forms import *
 from pol.models import *
 
@@ -16,29 +15,6 @@ def topX(request, x):
     return render(request, 'topX.html', {
         'toppliste': toppliste,
     })
-
-
-def tabletest(request):
-    varenavnform = VarenavnForm(request.GET)
-    varetypeform = VaretypeForm(request.GET)
-    prisform = PrisForm(request.GET)
-    volumform = VolumForm(request.GET)
-    alkoholform = AlkoholForm(request.GET)
-    enhetsprisform = EnhetsprisForm(request.GET)
-    sorteringsform = SorteringsForm(request.GET)
-    f = ProduktFilter(request.GET, queryset=Produkter.objects.all())[:100]
-    return render_to_response('tabletest.html', {
-        'filter': f,
-        'request': request,
-        'varenavnform': varenavnform,
-        'varetypeform': varetypeform,
-        'prisform': prisform,
-        'volumform': volumform,
-        'alkoholform': alkoholform,
-        'enhetsprisform': enhetsprisform,
-        'sorteringsform': sorteringsform,
-    })
-
 
 def liste(request):
     varenavnform = VarenavnForm(request.GET)
@@ -87,10 +63,3 @@ class ProduktVisning(generic.DetailView):
 
 def map(request):
     return render(request, 'map.html')
-
-
-class ProduktVisningsSet(viewsets.ReadOnlyModelViewSet):
-    def get_queryset(self):
-        f = ProduktFilter(self.request.GET, queryset=Produkter.objects.all())
-        return f
-    serializer_class = ProduktSerializer
