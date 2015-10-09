@@ -2,7 +2,7 @@
 {% block scripts %}
     <script>
         $(document).ready(function(){
-            updateTable()
+            updateTable();
             $(".filterform").change(function(){
                 updateTable();
             });
@@ -21,7 +21,10 @@
         function utvid(varenummer) {
             if(sistvarenummer > 0) {
                 $('#'+sistvarenummer).html("");
-                console.log(sistvarenummer);
+            }
+            if (varenummer == sistvarenummer) {
+                sistvarenummer = 0;
+                return;
             }
             sistvarenummer = varenummer;
             $.ajax({
@@ -31,7 +34,6 @@
                     $('#'+varenummer).html(data);
                 }
             });
-            console.log(varenummer);
         }
     </script>
 {% endblock scripts %}
