@@ -14,8 +14,24 @@
                 data:$(".filterform").serialize(),
                 success: function(data) {
                     $('#table').html(data);
-                },
+                }
             });
+        }
+        var sistvarenummer;
+        function utvid(varenummer) {
+            if(sistvarenummer > 0) {
+                $('#'+sistvarenummer).html("");
+                console.log(sistvarenummer);
+            }
+            sistvarenummer = varenummer;
+            $.ajax({
+                type: "GET",
+                url: '/pol/produkt/'+varenummer,
+                success: function(data) {
+                    $('#'+varenummer).html(data);
+                }
+            });
+            console.log(varenummer);
         }
     </script>
 {% endblock scripts %}
