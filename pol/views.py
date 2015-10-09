@@ -57,9 +57,15 @@ def table(request):
     })
 
 
-class ProduktVisning(generic.DetailView):
+class Produktside(generic.DetailView):
     model = Produkter
     template_name = 'produktside.html'
+
+
+class Produktvisning(generic.DetailView):
+    model = Produkter
+    template_name = 'produktvisning.html'
+
 
 def map(request):
     return render(request, 'map.html')
