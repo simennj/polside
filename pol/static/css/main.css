@@ -33,3 +33,13 @@
 .filterform .errorlist {
     display: none;
 }
+
+#produktinfo {
+    padding: 0;
+    border: 0;
+}
+
+.produktdiv {
+    display: none;
+    padding: 8px;
+}

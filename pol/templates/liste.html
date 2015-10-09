@@ -19,19 +19,21 @@
         }
         var sistvarenummer;
         function utvid(varenummer) {
+            var sistvare = $('#' + sistvarenummer);
             if(sistvarenummer > 0) {
-                $('#'+sistvarenummer).html("");
+                sistvare.slideUp();
             }
             if (varenummer == sistvarenummer) {
                 sistvarenummer = 0;
                 return;
             }
             sistvarenummer = varenummer;
+            var vare = $('#' + varenummer);
             $.ajax({
                 type: "GET",
                 url: '/pol/produkt/'+varenummer,
                 success: function(data) {
-                    $('#'+varenummer).html(data);
+                    vare.html(data).slideDown();
                 }
             });
         }

@@ -16,7 +16,11 @@
             <td>{{ produkt.volum }}cl</td>
             <td>{{ produkt.alkohol }}%</td>
             <td>{{ produkt.enhetspris }}ml</td>
-            <tr id="{{ produkt.varenummer }}"></tr>
+        <tr>
+            <td colspan="6" id="produktinfo">
+                <div id="{{ produkt.varenummer }}" class="produktdiv"><br></div>
+            </td>
+        </tr>
         </tr>
     {% endfor %}
     </tbody>
