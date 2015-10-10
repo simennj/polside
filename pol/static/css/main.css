@@ -34,6 +34,10 @@
     display: none;
 }
 
+#table {
+
+}
+
 #produktinfo {
     padding: 0;
     border: 0;
@@ -42,4 +46,12 @@
 .produktdiv {
     display: none;
     padding: 8px;
+}
+
+.produktdiv span {
+    margin-left: 16px;
+}
+
+.vinmonopolet {
+    float: right;
 }
