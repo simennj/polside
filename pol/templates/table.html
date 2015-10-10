@@ -1,11 +1,11 @@
 <table class="table table-striped">
     <thead><tr>
-        <th>Navn</th>
-        <th>Type</th>
-        <th>Pris</th>
-        <th>Volum</th>
-        <th>Alkohol</th>
-        <th>Alkhol/kr</th>
+        <th onclick="sort(10)">Navn</th>
+        <th onclick="sort(8)">Type</th>
+        <th onclick="sort(6)">Pris</th>
+        <th onclick="sort(4)">Volum</th>
+        <th onclick="sort(2)">Alkohol</th>
+        <th onclick="sort(0)">Alkhol/kr</th>
     </tr></thead>
     <tbody>
     {% for produkt in filter %}
@@ -16,11 +16,11 @@
             <td>{{ produkt.volum }}cl</td>
             <td>{{ produkt.alkohol }}%</td>
             <td>{{ produkt.enhetspris }}ml</td>
+        </tr>
         <tr>
             <td colspan="6" id="produktinfo">
                 <div id="{{ produkt.varenummer }}" class="produktdiv"><br></div>
             </td>
-        </tr>
         </tr>
     {% endfor %}
     </tbody>
