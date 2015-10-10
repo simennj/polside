@@ -44,7 +44,7 @@ def table(request):
     alkoholform = AlkoholForm(request.GET)
     enhetsprisform = EnhetsprisForm(request.GET)
     sorteringsform = SorteringsForm(request.GET)
-    f = ProduktFilter(request.GET, queryset=Produkter.objects.all())[:100]
+    f = ProduktFilter(request.GET, queryset=Produkter.objects.filter(produktutvalg__contains="Ba"))[:100]
     return render_to_response('table.html', {
         'filter': f,
         'varenavnform': varenavnform,
