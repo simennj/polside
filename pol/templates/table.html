@@ -5,7 +5,7 @@
         <th onclick="sort(6)">Pris</th>
         <th onclick="sort(4)">Volum</th>
         <th onclick="sort(2)">Alkohol</th>
-        <th onclick="sort(0)">Alkhol/kr</th>
+        <th onclick="sort(0)">Pris/cl</th>
     </tr></thead>
     <tbody>
     {% for produkt in filter %}
@@ -15,7 +15,7 @@
             <td>{{ produkt.pris }}.-</td>
             <td>{{ produkt.volum }}cl</td>
             <td>{{ produkt.alkohol }}%</td>
-            <td>{{ produkt.enhetspris }}ml</td>
+            <td>{{ produkt.enhetspris }}kr</td>
         </tr>
         <tr>
             <td colspan="6" id="produktinfo">
