@@ -55,3 +55,7 @@
 .vinmonopolet {
     float: right;
 }
+
+.clear_both {
+    clear: both;
+}
