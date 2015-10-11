@@ -1,17 +1,24 @@
 {% extends "base.html" %}
 {% block scripts %}
     <script>
+        window.onpopstate = function () {
+            //history.go(0); //TODO: forward functionality
+        };
+        var filterform = $(".filterform").serialize();
         $(document).ready(function(){
-            updateTable()
-            $(".filterform").change(function(){
-                updateTable();
-            });
+            loadTable();
+            $(".filterform").change(updateTable);
         });
         function updateTable() {
+            history.pushState({}, "asdf", '/pol/liste?' + filterform);
+            loadTable();
+        }
+        function loadTable() {
+            filterform = $(".filterform").serialize();
             $.ajax({
                 type: "GET",
                 url: '/pol/table',
-                data:$(".filterform").serialize(),
+                data: filterform,
                 success: function(data) {
                     $('#table').html(data);
                 }
@@ -19,19 +26,31 @@
         }
         var sistvarenummer;
         function utvid(varenummer) {
+            var sistvare = $('#' + sistvarenummer);
             if(sistvarenummer > 0) {
-                $('#'+sistvarenummer).html("");
-                console.log(sistvarenummer);
+                sistvare.slideUp();
+            }
+            if (varenummer == sistvarenummer) {
+                sistvarenummer = 0;
+                return sistvarenummer;
             }
             sistvarenummer = varenummer;
+            var vare = $('#' + varenummer);
             $.ajax({
                 type: "GET",
                 url: '/pol/produkt/'+varenummer,
                 success: function(data) {
-                    $('#'+varenummer).html(data);
+                    vare.html(data).slideDown();
                 }
             });
-            console.log(varenummer);
+        }
+        function sort(query) {//TODO: have to press twice to toggle enhetspris at page load
+            var valgt = $('#id_o_' + query);
+            if (valgt.is(':checked'))
+                $('#id_o_' + (query + 1)).prop("checked", true);
+            else
+                valgt.prop("checked", true);
+            loadTable()
         }
     </script>
 {% endblock scripts %}
@@ -39,12 +58,13 @@
     <form class="filterform">
         <div class="form-group">{{ varenavnform }}</div>
         <div id="varetypeform" class="form-group collapse">{{ varetypeform }}</div>
-        <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Mer</a>
+        {# TODO: faster/easier to minimize again #}
+        <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Varetyper</a>
         <div class="form-group">{{ prisform }}</div>
         <div class="form-group">{{ volumform }}</div>
         <div class="form-group">{{ alkoholform }}</div>
         <div class="form-group">{{ enhetsprisform }}</div>
-        <div class="form-group">{{ sorteringsform }}</div>
+        <div class="form-group hidden">{{ sorteringsform }}</div>
     </form>
 {% endblock sidebar %}
 {% block content %}

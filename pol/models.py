@@ -61,7 +61,7 @@ class Produkter(models.Model):
 
 
 class ProduktFilter(django_filters.FilterSet):
-    CHOICES =(
+    CHOICES = (
         ('Rødvin', 'Rødvin'),
         ('Hvitvin', 'Hvitvin'),
         ('Musserende Vin', 'Musserende Vin'),
@@ -114,7 +114,9 @@ class ProduktFilter(django_filters.FilterSet):
             'enhetspris',
             '-enhetspris',
             'varenavn',
+            '-varenavn',
             'varetype',
+            '-varetype',
             'pris',
             '-pris',
             'volum',

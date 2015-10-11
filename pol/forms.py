@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from .models import ProduktFilter, Produkter
-
 
 class VarenavnForm(forms.Form):
     varenavn = forms.CharField(max_length=80,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -75,7 +73,9 @@ class SorteringsForm(forms.Form):
         ('pris', 'pris'),
         ('-pris', '-pris'),
         ('varetype', 'varetype'),
+        ('-varetype', '-varetype'),
         ('varenavn', 'varenavn'),
+        ('-varenavn', '-varenavn'),
     )
     o = forms.MultipleChoiceField(
         choices=CHOICES,
