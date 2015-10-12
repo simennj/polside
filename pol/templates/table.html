@@ -1,11 +1,11 @@
 <table class="table table-striped">
     <thead><tr>
-        <th onclick="sort(10)">Navn</th>
-        <th onclick="sort(8)">Type</th>
-        <th onclick="sort(6)">Pris</th>
-        <th onclick="sort(4)">Volum</th>
-        <th onclick="sort(2)">Alkohol</th>
-        <th onclick="sort(0)">Pris/cl</th>
+        <th class="tablesort" onclick="sort(10)"><span id="o_10"></span>Navn</th>
+        <th class="tablesort" onclick="sort(8)"><span id="o_8"></span>Type</th>
+        <th class="tablesort" onclick="sort(6)"><span id="o_6"></span>Pris</th>
+        <th class="tablesort" onclick="sort(4)"><span id="o_4"></span>Volum</th>
+        <th class="tablesort" onclick="sort(2)"><span id="o_2"></span>Alkohol</th>
+        <th class="tablesort" onclick="sort(0)"><span id="o_0"></span>Pris/cl</th>
     </tr></thead>
     <tbody>
     {% for produkt in filter %}
@@ -15,7 +15,7 @@
             <td>{{ produkt.pris }}.-</td>
             <td>{{ produkt.volum }}cl</td>
             <td>{{ produkt.alkohol }}%</td>
-            <td>{{ produkt.enhetspris }}kr</td>
+            <td>{{ produkt.enhetspris }}.-</td>
         </tr>
         <tr>
             <td colspan="6" id="produktinfo">

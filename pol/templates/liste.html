@@ -5,6 +5,7 @@
             //history.go(0); //TODO: forward functionality
         };
         var filterform = $(".filterform").serialize();
+        //var sortedby = filterform.
         $(document).ready(function(){
             loadTable();
             $(".filterform").change(updateTable);
@@ -15,12 +16,22 @@
         }
         function loadTable() {
             filterform = $(".filterform").serialize();
+
             $.ajax({
                 type: "GET",
                 url: '/pol/table',
                 data: filterform,
                 success: function(data) {
                     $('#table').html(data);
+                    $('.tablesort span').removeClass();
+                    var sortedby = parseInt($("#sorteringsform input:checked").attr('id').split('_')[2]);
+                    {# TODO: error at site load if no query #}
+                    var desc = sortedby % 2;
+                    if (desc) {
+                        $("#o_" + (sortedby - desc)).addClass("glyphicon glyphicon-triangle-bottom");
+                    } else {
+                        $("#o_" + (sortedby)).addClass("glyphicon glyphicon-triangle-top");
+                    }
                 }
             });
         }
@@ -65,7 +76,7 @@
         <div class="form-group">{{ alkoholform }}</div>
         <div class="form-group">{{ enhetsprisform }}</div>
         <div class="clear_both"></div>
-        <div class="form-group hidden">{{ sorteringsform }}</div>
+        <div id="sorteringsform" class="form-group hidden">{{ sorteringsform }}</div>
     </form>
 {% endblock sidebar %}
 {% block content %}
