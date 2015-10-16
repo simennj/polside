@@ -63,7 +63,15 @@ class EnhetsprisForm(forms.Form):
 
 
 class Butikkategoriform(forms.Form):
-    butikkategori = forms.CharField(max_length=20, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    butikkategori = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}), choices=(
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+        (6, 6),
+        (7, 7),
+    ))
 
 class SorteringsForm(forms.Form):
     CHOICES = (

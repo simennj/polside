@@ -3,6 +3,19 @@ from __future__ import unicode_literals
 
 from django.db import models
 import django_filters
+from django.db.models import Lookup
+
+
+class Butikkategorilookup(Lookup):
+    lookup_name = 'bkat'
+
+    def as_sql(self, compiler, connection):
+        lhs, lhs_params = self.process_lhs(compiler, connection)
+        rhs, rhs_params = self.process_rhs(compiler, connection)
+        rhs_params[0] = 'Butikkategori ' + rhs_params[0]
+        params = lhs_params + rhs_params
+        return '%s <= %s' % (lhs, rhs), params
+        # TODO: Do this properly if i ever learn the API
 
 
 class Produkter(models.Model):
@@ -43,6 +56,8 @@ class Produkter(models.Model):
     korktype = models.CharField(db_column='Korktype', max_length=14, blank=True, null=True)
     vareurl = models.CharField(db_column='Vareurl', max_length=61, blank=True, null=True)
     enhetspris = models.DecimalField(db_column='Enhetspris', max_digits=7, decimal_places=2, blank=True, null=True)
+
+    butikkategori.register_lookup(Butikkategorilookup)
 
     class Meta:
         db_table = 'produkter'
@@ -100,15 +115,7 @@ class ProduktFilter(django_filters.FilterSet):
     volum = django_filters.RangeFilter()
     alkohol = django_filters.RangeFilter()
     enhetspris = django_filters.RangeFilter()
-    butikkategori = django_filters.MultipleChoiceFilter(choices=(
-        ('Butikkategori 1', 'kategori 1'),
-        ('Butikkategori 2', 'kategori 2'),
-        ('Butikkategori 3', 'kategori 3'),
-        ('Butikkategori 4', 'kategori 4'),
-        ('Butikkategori 5', 'kategori 5'),
-        ('Butikkategori 6', 'kategori 6'),
-        ('Butikkategori 7', 'kategori 7'),
-    ))
+    butikkategori = django_filters.CharFilter(lookup_type='bkat')
 
     class Meta:
         fields = (
