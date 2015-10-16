@@ -1,22 +1,25 @@
 {% extends "base.html" %}
 {% block scripts %}
     <script>
+
         window.onpopstate = function () {
             //history.go(0); //TODO: forward functionality
         };
+
         var filterform = $(".filterform").serialize();
         //var sortedby = filterform.
         $(document).ready(function(){
             loadTable();
             $(".filterform").change(updateTable);
         });
+
         function updateTable() {
             history.pushState({}, "asdf", '/pol/liste?' + filterform);
             loadTable();
         }
+
         function loadTable() {
             filterform = $(".filterform").serialize();
-
             $.ajax({
                 type: "GET",
                 url: '/pol/table',
@@ -35,6 +38,7 @@
                 }
             });
         }
+
         var sistvarenummer;
         function utvid(varenummer) {
             var sistvare = $('#' + sistvarenummer);
@@ -55,6 +59,7 @@
                 }
             });
         }
+
         function sort(query) {//TODO: have to press twice to toggle enhetspris at page load
             var valgt = $('#id_o_' + query);
             if (valgt.is(':checked'))
@@ -63,6 +68,7 @@
                 valgt.prop("checked", true);
             loadTable()
         }
+
     </script>
 {% endblock scripts %}
 {% block sidebar %}
@@ -75,32 +81,11 @@
         <div class="form-group">{{ volumform }}</div>
         <div class="form-group">{{ alkoholform }}</div>
         <div class="form-group">{{ enhetsprisform }}</div>
+        <div class="form-group">{{ butikkategoriform }}</div>
         <div class="clear_both"></div>
         <div id="sorteringsform" class="form-group hidden">{{ sorteringsform }}</div>
     </form>
 {% endblock sidebar %}
 {% block content %}
     <div id="table"></div>
-    {% comment %}<table class="table table-striped">
-    <thead><tr>
-        <th><label for="id_o_5">Navn</label></th>
-        <th><label for="id_o_4">Type</label></th>
-        <th><label for="id_o_3">Pris</label></th>
-        <th id="asdf"><label for="id_o_2">Volum</label></th>
-        <th><label for="id_o_1">Alkohol</label></th>
-        <th><label for="id_o_0">Pris/cl</label></th>
-    </tr></thead>
-    <tbody>
-    {% for produkt in filter %}
-        <tr>
-            <td>{{ produkt.varenavn }}</td>
-            <td>{{ produkt.varetype }}</td>
-            <td>{{ produkt.pris }}.-</td>
-            <td>{{ produkt.volum }}l</td>
-            <td>{{ produkt.alkohol }}%</td>
-            <td>{{ produkt.enhetspris }}kr</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>{% endcomment %}
 {% endblock content %}

@@ -67,3 +67,11 @@
 
 #sorteringsform {
 }
+
+#map {
+    height: 100%;
+}
+
+.maxheight {
+    height: 100%;
+}

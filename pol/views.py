@@ -24,9 +24,8 @@ def liste(request):
     alkoholform = AlkoholForm(request.GET)
     enhetsprisform = EnhetsprisForm(request.GET)
     sorteringsform = SorteringsForm(request.GET)
-    f = ProduktFilter(request.GET, queryset=Produkter.objects.all())[:100]
+    butikkategoriform = Butikkategoriform(request.GET)
     return render_to_response('liste.html', {
-        'filter': f,
         'varenavnform': varenavnform,
         'varetypeform': varetypeform,
         'prisform': prisform,
@@ -34,26 +33,13 @@ def liste(request):
         'alkoholform': alkoholform,
         'enhetsprisform': enhetsprisform,
         'sorteringsform': sorteringsform,
+        'butikkategoriform': butikkategoriform,
     })
 
 def table(request):
-    varenavnform = VarenavnForm(request.GET)
-    varetypeform = VaretypeForm(request.GET)
-    prisform = PrisForm(request.GET)
-    volumform = VolumForm(request.GET)
-    alkoholform = AlkoholForm(request.GET)
-    enhetsprisform = EnhetsprisForm(request.GET)
-    sorteringsform = SorteringsForm(request.GET)
     f = ProduktFilter(request.GET, queryset=Produkter.objects.filter(produktutvalg__contains="Ba"))[:100]
     return render_to_response('table.html', {
         'filter': f,
-        'varenavnform': varenavnform,
-        'varetypeform': varetypeform,
-        'prisform': prisform,
-        'volumform': volumform,
-        'alkoholform': alkoholform,
-        'enhetsprisform': enhetsprisform,
-        'sorteringsform': sorteringsform,
     })
 
 

@@ -100,6 +100,15 @@ class ProduktFilter(django_filters.FilterSet):
     volum = django_filters.RangeFilter()
     alkohol = django_filters.RangeFilter()
     enhetspris = django_filters.RangeFilter()
+    butikkategori = django_filters.MultipleChoiceFilter(choices=(
+        ('Butikkategori 1', 'kategori 1'),
+        ('Butikkategori 2', 'kategori 2'),
+        ('Butikkategori 3', 'kategori 3'),
+        ('Butikkategori 4', 'kategori 4'),
+        ('Butikkategori 5', 'kategori 5'),
+        ('Butikkategori 6', 'kategori 6'),
+        ('Butikkategori 7', 'kategori 7'),
+    ))
 
     class Meta:
         fields = (
@@ -109,6 +118,7 @@ class ProduktFilter(django_filters.FilterSet):
             'volum',
             'alkohol',
             'enhetspris',
+            'butikkategori'
         )
         order_by = (
             'enhetspris',

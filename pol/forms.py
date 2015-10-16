@@ -62,6 +62,9 @@ class EnhetsprisForm(forms.Form):
     enhetspris_1 = forms.DecimalField(min_value=0, label='', required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Maks'}))
 
 
+class Butikkategoriform(forms.Form):
+    butikkategori = forms.CharField(max_length=20, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+
 class SorteringsForm(forms.Form):
     CHOICES = (
         ('enhetspris', 'enhetspris'),
