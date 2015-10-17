@@ -60,8 +60,8 @@
 #sorteringsform {
 }
 
-#map {
-    height: 100%;
+#kart {
+    height: 608px;
 }
 
 .maxheight {
@@ -70,4 +70,12 @@
 
 #varetypebeholder {
     padding: 0;
+}
+
+#kartknapp {
+    margin-top: 25px;
+}
+
+#velgbutikk {
+    width: 100%;
 }

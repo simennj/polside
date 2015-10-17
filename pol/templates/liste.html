@@ -70,8 +70,22 @@
         }
 
     </script>
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css"/>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script>
+        function lastKart() {
+            if ($('#kart').html().length == 0) {
+                cartodb.createVis('kart', 'https://simennj.cartodb.com/api/v2/viz/16b23eda-69d2-11e5-a1bb-0e674067d321/viz.json');
+            }
+        }
+        function test() {
+            console.log("asdf");
+        }
+    </script>
 {% endblock scripts %}
 {% block sidebar %}
+
     <form class="filterform">
         <div class="form-group">{{ varenavnform }}</div>
         <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Varetyper</a>
@@ -87,7 +101,10 @@
         <div class="input-group">
             {{ butikkategoriform }}
             <span class="input-group-btn">
-                <button class="btn btn-default" style="margin-top: 26px">Kart</button>
+                <button id="kartknapp" type="button" class="btn btn-default" data-toggle="collapse"
+                        data-target="#kartholder" onclick="lastKart()"><span aria-label="kart"
+                                                                             class="glyphicon glyphicon-globe"></span>
+                </button>
             </span>
         </div>
         <div class="clear_both"></div>
@@ -95,5 +112,8 @@
     </form>
 {% endblock sidebar %}
 {% block content %}
+    <div id="kartholder" class="collapse">
+        <div id="kart"></div>
+    </div>
     <div id="table"></div>
 {% endblock content %}
