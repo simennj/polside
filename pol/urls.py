@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^table$', views.table),
     url(r'^produkt/(?P<pk>[0-9]+)/$', views.Produktvisning.as_view(), name='Produkt'),
     url(r'^produktside/(?P<pk>[0-9]+)/$', views.Produktside.as_view(), name='Produkt'),
-    url(r'^map', views.map)
+    url(r'^kart', views.map)
 ]

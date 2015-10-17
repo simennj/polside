@@ -22,14 +22,6 @@
 .filterform {
 }
 
-.filterform span {
-    display: none;
-}
-
-.filterform input {
-    float: right;
-}
-
 .filterform .errorlist {
     display: none;
 }
@@ -74,4 +66,8 @@
 
 .maxheight {
     height: 100%;
+}
+
+#varetypebeholder {
+    padding: 0;
 }

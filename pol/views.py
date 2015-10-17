@@ -36,6 +36,7 @@ def liste(request):
         'butikkategoriform': butikkategoriform,
     })
 
+
 def table(request):
     f = ProduktFilter(request.GET, queryset=Produkter.objects.filter(produktutvalg__contains="Ba"))[:100]
     return render_to_response('table.html', {

@@ -12,7 +12,8 @@ class Butikkategorilookup(Lookup):
     def as_sql(self, compiler, connection):
         lhs, lhs_params = self.process_lhs(compiler, connection)
         rhs, rhs_params = self.process_rhs(compiler, connection)
-        rhs_params[0] = 'Butikkategori ' + rhs_params[0]
+        print len(rhs_params[0])
+        rhs_params[0] = 'Butikkategori ' + rhs_params[0][-1]
         params = lhs_params + rhs_params
         return '%s <= %s' % (lhs, rhs), params
         # TODO: Do this properly if i ever learn the API

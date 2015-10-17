@@ -74,14 +74,22 @@
 {% block sidebar %}
     <form class="filterform">
         <div class="form-group">{{ varenavnform }}</div>
-        <div id="varetypeform" class="form-group collapse">{{ varetypeform }}</div>
-        {# TODO: faster/easier to minimize again #}
         <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Varetyper</a>
+        <div id="varetypeform" class="form-group collapse">
+            {{ varetypeform }}
+            <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Skjul</a>
+        </div>
+        {# TODO: faster/easier to minimize again #}
         <div class="form-group">{{ prisform }}</div>
         <div class="form-group">{{ volumform }}</div>
         <div class="form-group">{{ alkoholform }}</div>
         <div class="form-group">{{ enhetsprisform }}</div>
-        <div class="form-group">{{ butikkategoriform }}</div>
+        <div class="input-group">
+            {{ butikkategoriform }}
+            <span class="input-group-btn">
+                <button class="btn btn-default" style="margin-top: 26px">Kart</button>
+            </span>
+        </div>
         <div class="clear_both"></div>
         <div id="sorteringsform" class="form-group hidden">{{ sorteringsform }}</div>
     </form>
