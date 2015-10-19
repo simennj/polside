@@ -3,7 +3,7 @@
     <script>
 
         window.onpopstate = function () {
-            //history.go(0); //TODO: forward functionality
+            // TODO: history.go(0);
         };
 
         var filterform = $(".filterform").serialize();
@@ -14,7 +14,7 @@
         });
 
         function updateTable() {
-            history.pushState({}, "asdf", '/pol/liste?' + filterform);
+            // TODO: history.pushState({}, "asdf", '/pol?' + filterform);
             loadTable();
         }
 
