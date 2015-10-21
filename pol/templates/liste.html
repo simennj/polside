@@ -74,9 +74,22 @@
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css"/>
     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     <script>
+        var kart;
+        var karturl = 'https://simennj.cartodb.com/api/v2/viz/16b23eda-69d2-11e5-a1bb-0e674067d321/viz.json';
         function lastKart() {
             if ($('#kart').html().length == 0) {
-                cartodb.createVis('kart', 'https://simennj.cartodb.com/api/v2/viz/16b23eda-69d2-11e5-a1bb-0e674067d321/viz.json');
+                var options = {
+                    infowindow: false,
+                };
+                cartodb.createVis('kart', 'https://simennj.cartodb.com/api/v2/viz/16b23eda-69d2-11e5-a1bb-0e674067d321/viz.json', options)
+                        .done(function (vis, layers) {
+                            //layers[1].setInteraction(true);
+                            layers[1].setInteractivity("butikknavn, kategori");
+                            layers[1].on('featureClick', function (e, latlng, pos, data) {
+                                $('#id_butikkategori').val(data.kategori);
+                                loadTable();
+                            });
+                        });
             }
         }
         function test() {
@@ -94,6 +107,7 @@
             <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Skjul</a>
         </div>
         {# TODO: faster/easier to minimize again #}
+        {# TODO: reduce to one row for each form-group #}
         <div class="form-group">{{ prisform }}</div>
         <div class="form-group">{{ volumform }}</div>
         <div class="form-group">{{ alkoholform }}</div>
@@ -102,8 +116,8 @@
             {{ butikkategoriform }}
             <span class="input-group-btn">
                 <button id="kartknapp" type="button" class="btn btn-default" data-toggle="collapse"
-                        data-target="#kartholder" onclick="lastKart()"><span aria-label="kart"
-                                                                             class="glyphicon glyphicon-globe"></span>
+                        data-target="#kartholder" onclick="lastKart()">
+                    <span aria-label="kart" class="glyphicon glyphicon-globe"></span>
                 </button>
             </span>
         </div>
