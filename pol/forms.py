@@ -3,7 +3,8 @@ from django import forms
 
 
 class VarenavnForm(forms.Form):
-    varenavn = forms.CharField(max_length=80,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    varenavn = forms.CharField(max_length=80, label='', required=False,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
 class VaretypeForm(forms.Form):
@@ -39,31 +40,37 @@ class VaretypeForm(forms.Form):
         ('Genever', 'Genever'),
         ('Øvrig Svakvin', 'Øvrig Svakvin'),
     )
-    varetype = forms.MultipleChoiceField(choices=CHOICES, widget=forms.CheckboxSelectMultiple(), required=False)
+    varetype = forms.MultipleChoiceField(label='', choices=CHOICES, widget=forms.CheckboxSelectMultiple(),
+                                         required=False)
 
 
 class PrisForm(forms.Form):
-    pris_0 = forms.DecimalField(required=False, label='Pris', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Min'}))
+    pris_0 = forms.DecimalField(required=False, label='',
+                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Min'}))
     pris_1 = forms.DecimalField(required=False, label='', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Maks'}))
 
 
 class VolumForm(forms.Form):
-    volum_0 = forms.DecimalField(min_value=0, label='Volum', required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Min'}))
+    volum_0 = forms.DecimalField(min_value=0, label='', required=False,
+                                 widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Min'}))
     volum_1 = forms.DecimalField(min_value=0, label='', required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Maks'}))
 
 
 class AlkoholForm(forms.Form):
-    alkohol_0 = forms.DecimalField(min_value=0, label='Alkohol', required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Min'}))
+    alkohol_0 = forms.DecimalField(min_value=0, label='', required=False,
+                                   widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Min'}))
     alkohol_1 = forms.DecimalField(min_value=0, label='', required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Maks'}))
 
 
 class EnhetsprisForm(forms.Form):
-    enhetspris_0 = forms.DecimalField(min_value=0, label='Alkohol/kr', required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Min'}))
+    enhetspris_0 = forms.DecimalField(min_value=0, label='', required=False,
+                                      widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Min'}))
     enhetspris_1 = forms.DecimalField(min_value=0, label='', required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Maks'}))
 
 
 class Butikkategoriform(forms.Form):
-    butikkategori = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Kategori 1-7'}))
+    butikkategori = forms.CharField(label='', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Kategori 1-7'}))
 
 class SorteringsForm(forms.Form):
     CHOICES = (

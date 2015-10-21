@@ -72,9 +72,17 @@
 }
 
 #kartknapp {
-    margin-top: 25px;
+
 }
 
 #velgbutikk {
     width: 100%;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.tofelts .form-control {
+    width: 50%;
 }
