@@ -1,20 +1,11 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render_to_response
 from django.views import generic
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from pol.forms import *
 from pol.models import *
 
-
-def index(request):
-    return render(request, 'index.html')
-
-
-def topX(request, x):
-    toppliste = Produkter.objects.filter(produktutvalg='Basisutvalget').order_by('enhetspris')[:int(x)]
-    return render(request, 'topX.html', {
-        'toppliste': toppliste,
-    })
 
 def liste(request):
     varenavnform = VarenavnForm(request.GET)
@@ -38,9 +29,19 @@ def liste(request):
 
 
 def table(request):
-    f = ProduktFilter(request.GET, queryset=Produkter.objects.filter(produktutvalg__contains="Ba"))[:100]
+    f = ProduktFilter(request.GET, queryset=Produkter.objects.filter(produktutvalg__contains="Ba"))
+    paginator = Paginator(f, 25)
+
+    side = request.GET.get('side')
+    try:
+        produkter = paginator.page(side)
+    except PageNotAnInteger:
+        produkter = paginator.page(1)
+    except EmptyPage:
+        produkter = paginator.page(paginator.num_pages)
+
     return render_to_response('table.html', {
-        'filter': f,
+        'produkter': produkter,
     })
 
 
@@ -52,7 +53,3 @@ class Produktside(generic.DetailView):
 class Produktvisning(generic.DetailView):
     model = Produkter
     template_name = 'produktvisning.html'
-
-
-def map(request):
-    return render(request, 'map.html')

@@ -1,9 +1,10 @@
 .content {
-    margin-top: 58px;
+    padding-top: 8px;
 }
 
 .navbar {
     background: #161616;
+    padding-left: 8px;
 }
 
 .navbar a {
@@ -26,12 +27,21 @@
 }
 
 #table {
-
 }
 
 #produktinfo {
     padding: 0;
     border: 0;
+}
+
+.produkt {
+    cursor: pointer;
+    max-height: 1px;
+    overflow: hidden;
+}
+
+.produkt:hover td {
+    background-color: white;
 }
 
 .produktdiv {
@@ -60,7 +70,9 @@
 }
 
 #kart {
-    height: 286px;
+    height: 358px;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
 }
 
 .maxheight {

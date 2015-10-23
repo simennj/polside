@@ -29,7 +29,8 @@
             <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Skjul</a>
         </div>
         <div class="clear_both"></div>
-        <div id="sorteringsform" class="form-group hidden">{{ sorteringsform }}</div>
+        <div class="input-group hidden"><input id="side" name="side"></div>
+        <div id="sorteringsform" class="input-group hidden">{{ sorteringsform }}</div>
     </form>
 {% endblock sidebar %}
 {% block content %}
@@ -107,6 +108,12 @@
             else
                 valgt.prop("checked", true);
             loadTable()
+        }
+
+        function page(number) {
+            $('#side').val(number);
+            loadTable();
+            return false
         }
 
     </script>

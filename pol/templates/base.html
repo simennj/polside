@@ -14,28 +14,21 @@
 </head>
 <body>
 <div class="container content">
-    <div class="row">
+    <div class="col-md-4 sidebar">
         <nav class="navbar">
-            {# TODO: omgjore eller fjerne, ihvertfall fjerne fixed, blir egentlig ikke brukt til noe #}
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/pol">
-                        <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
-                        Polguide
-                    </a>
-                </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/pol">
+                    <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
+                    Polguide
+                </a>
             </div>
         </nav>
+        {% block sidebar %}
+        {% endblock sidebar %}
     </div>
-    <div class="row">
-        <div class="col-md-4 sidebar">
-            {% block sidebar %}
-            {% endblock sidebar %}
-        </div>
-        <div class="col-md-8">
-            {% block content %}
-            {% endblock content %}
-        </div>
+    <div class="col-md-8">
+        {% block content %}
+        {% endblock content %}
     </div>
 </div>
 </body>

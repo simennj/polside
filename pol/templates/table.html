@@ -5,17 +5,17 @@
         <th class="tablesort" onclick="sort(6)"><span id="o_6"></span>Pris</th>
         <th class="tablesort" onclick="sort(4)"><span id="o_4"></span>Volum</th>
         <th class="tablesort" onclick="sort(2)"><span id="o_2"></span>Alkohol</th>
-        <th class="tablesort" onclick="sort(0)"><span id="o_0"></span>Pris/cl</th>
+        <th class="tablesort" onclick="sort(0)"><span id="o_0"></span>Alkoholpris</th>
     </tr></thead>
     <tbody>
-    {% for produkt in filter %}
-        <tr onclick="utvid({{ produkt.varenummer }})">
+    {% for produkt in produkter %}
+        <tr class="produkt" onclick="utvid({{ produkt.varenummer }})">
             <td>{{ produkt.varenavn }}</td>
             <td>{{ produkt.varetype }}</td>
             <td>{{ produkt.pris }}.-</td>
             <td>{{ produkt.volum }}l</td>
             <td>{{ produkt.alkohol }}%</td>
-            <td>{{ produkt.enhetspris }}.-</td>
+            <td>{{ produkt.enhetspris }}kr/cl</td>
         </tr>
         <tr>
             <td colspan="6" id="produktinfo">
@@ -25,3 +25,30 @@
     {% endfor %}
     </tbody>
 </table>
+<nav>
+    <ul class="pagination">
+        {% if produkter.has_previous %}
+            <li><a onclick="page({{ produkter.previous_page_number }})"
+        {% else %}
+            <li class="disabled"><a
+        {% endif %}
+        aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+        </li>
+        {% for pagenumber in produkter.paginator.page_range %}
+            <li id="sidenummer_{{ pagenumber }}"><a href="#"
+                                                    onclick="return page({{ pagenumber }})">{{ pagenumber }}</a></li>
+        {% endfor %}
+        <script>$('#sidenummer_{{ produkter.number }}').addClass('active');</script>
+        {% if produkter.has_next %}
+            <li><a onclick="page({{ produkter.next_page_number }})"
+        {% else %}
+            <li class="disabled"><a
+        {% endif %}
+        aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+        </li>
+    </ul>
+</nav>
