@@ -66,6 +66,7 @@
                 success: function (data) {
                     $('#table').html(data);
                     $('.tablesort span').removeClass();
+                    if ($("#sorteringsform input:checked").attr('id') == undefined) $("#id_o_0").prop("checked", true);
                     var sortedby = parseInt($("#sorteringsform input:checked").attr('id').split('_')[2]);
                     {# TODO: error at site load if no query #}
                     var desc = sortedby % 2;
@@ -118,7 +119,7 @@
         function lastKart() {
             if ($('#kart').html().length == 0) {
                 var options = {
-                    infowindow: false,
+                    infowindow: false
                 };
                 cartodb.createVis('kart', 'https://simennj.cartodb.com/api/v2/viz/16b23eda-69d2-11e5-a1bb-0e674067d321/viz.json', options)
                         .done(function (vis, layers) {
