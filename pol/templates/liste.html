@@ -13,7 +13,6 @@
             </span>
         </div>
         <div class="input-group"><span class="input-group-addon form-label">Varenavn</span>{{ varenavnform }}</div>
-        {# TODO: faster/easier to minimize again #}
         <div class="input-group tofelts">
             <span class="input-group-addon form-label">Pris</span>{{ prisform }}</div>
         <div class="input-group tofelts">
@@ -26,7 +25,7 @@
             Varetyper
         </button>
         <div id="varetypeform" class="collapse">
-            {{ varetypeform }}
+            {% for v in varetypeform.varetype %}<label class="btn btn-default varetype">{{ v }}</label>{% endfor %}
             <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Skjul</a>
         </div>
         <div class="clear_both"></div>
@@ -48,7 +47,7 @@
 
         var filterform = $(".filterform").serialize();
         //var sortedby = filterform.
-        $(document).ready(function(){
+        $(document).ready(function () {
             loadTable();
             $(".filterform").change(updateTable);
         });
@@ -64,7 +63,7 @@
                 type: "GET",
                 url: '/pol/table',
                 data: filterform,
-                success: function(data) {
+                success: function (data) {
                     $('#table').html(data);
                     $('.tablesort span').removeClass();
                     var sortedby = parseInt($("#sorteringsform input:checked").attr('id').split('_')[2]);
@@ -82,7 +81,7 @@
         var sistvarenummer;
         function utvid(varenummer) {
             var sistvare = $('#' + sistvarenummer);
-            if(sistvarenummer > 0) {
+            if (sistvarenummer > 0) {
                 sistvare.slideUp();
             }
             if (varenummer == sistvarenummer) {
@@ -93,8 +92,8 @@
             var vare = $('#' + varenummer);
             $.ajax({
                 type: "GET",
-                url: '/pol/produkt/'+varenummer,
-                success: function(data) {
+                url: '/pol/produkt/' + varenummer,
+                success: function (data) {
                     vare.html(data).slideDown();
                 }
             });
