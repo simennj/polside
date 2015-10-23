@@ -1,4 +1,44 @@
 {% extends "base.html" %}
+{% block sidebar %}
+    <form class="filterform">
+        <div class="input-group">
+            <span class="input-group-addon form-label">Butikk</span>
+            {{ butikkategoriform }}
+            <span class="input-group-btn">
+                <button id="kartknapp" type="button" class="btn btn-default" data-toggle="collapse"
+                        data-target="#kartholder" onclick="lastKart()">
+                    <span aria-label="kart" class="glyphicon glyphicon-globe"></span>
+                    Kart
+                </button>
+            </span>
+        </div>
+        <div class="input-group"><span class="input-group-addon form-label">Varenavn</span>{{ varenavnform }}</div>
+        {# TODO: faster/easier to minimize again #}
+        <div class="input-group tofelts">
+            <span class="input-group-addon form-label">Pris</span>{{ prisform }}</div>
+        <div class="input-group tofelts">
+            <span class="input-group-addon form-label">Volum</span>{{ volumform }}</div>
+        <div class="input-group tofelts">
+            <span class="input-group-addon form-label">Alkohol</span>{{ alkoholform }}</div>
+        <div class="input-group tofelts">
+            <span class="input-group-addon form-label">Alkoholpris</span>{{ enhetsprisform }}</div>
+        <button class="btn btn-default btn-block" type="button" data-toggle="collapse" data-target="#varetypeform">
+            Varetyper
+        </button>
+        <div id="varetypeform" class="collapse">
+            {{ varetypeform }}
+            <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Skjul</a>
+        </div>
+        <div class="clear_both"></div>
+        <div id="sorteringsform" class="form-group hidden">{{ sorteringsform }}</div>
+    </form>
+{% endblock sidebar %}
+{% block content %}
+    <div id="kartholder" class="collapse">
+        <div id="kart"></div>
+    </div>
+    <div id="table"></div>
+{% endblock content %}
 {% block scripts %}
     <script>
 
@@ -97,38 +137,3 @@
         }
     </script>
 {% endblock scripts %}
-{% block sidebar %}
-
-    <form class="filterform">
-        <div class="input-group">{{ varenavnform }}</div>
-        <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Varetyper</a>
-
-        <div id="varetypeform" class="collapse">
-            {{ varetypeform }}
-            <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Skjul</a>
-        </div>
-        {# TODO: faster/easier to minimize again #}
-        {# TODO: add new labels #}
-        <div class="input-group tofelts">{{ prisform }}</div>
-        <div class="input-group tofelts">{{ volumform }}</div>
-        <div class="input-group tofelts">{{ alkoholform }}</div>
-        <div class="input-group tofelts">{{ enhetsprisform }}</div>
-        <div class="input-group">
-            {{ butikkategoriform }}
-            <span class="input-group-btn">
-                <button id="kartknapp" type="button" class="btn btn-default" data-toggle="collapse"
-                        data-target="#kartholder" onclick="lastKart()">
-                    <span aria-label="kart" class="glyphicon glyphicon-globe"></span>
-                </button>
-            </span>
-        </div>
-        <div class="clear_both"></div>
-        <div id="sorteringsform" class="form-group hidden">{{ sorteringsform }}</div>
-    </form>
-{% endblock sidebar %}
-{% block content %}
-    <div id="kartholder" class="collapse">
-        <div id="kart"></div>
-    </div>
-    <div id="table"></div>
-{% endblock content %}

@@ -15,7 +15,6 @@
 }
 
 .sidebar {
-    padding-top: 8px;
 }
 
 .filterform {
@@ -60,7 +59,7 @@
 }
 
 #kart {
-    height: 608px;
+    height: 238px;
 }
 
 .maxheight {
@@ -69,6 +68,10 @@
 
 #varetypebeholder {
     padding: 0;
+}
+
+.form-label {
+    width: 7em;
 }
 
 #kartknapp {

@@ -4,7 +4,7 @@ from django import forms
 
 class VarenavnForm(forms.Form):
     varenavn = forms.CharField(max_length=80, label='', required=False,
-                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Søk'}))
 
 
 class VaretypeForm(forms.Form):
