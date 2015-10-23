@@ -1,4 +1,5 @@
 .content {
+    margin-top: 58px;
 }
 
 .navbar {
@@ -59,7 +60,7 @@
 }
 
 #kart {
-    height: 238px;
+    height: 286px;
 }
 
 .maxheight {
@@ -84,6 +85,7 @@
 
 .input-group {
     width: 100%;
+    margin-bottom: 8px;
 }
 
 .tofelts .form-control {
@@ -93,4 +95,5 @@
 .varetype {
     width: 50%;
     margin: 0;
+    overflow: hidden;
 }
