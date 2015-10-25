@@ -7,7 +7,7 @@
             <span class="input-group-btn">
                 <button id="kartknapp" type="button" class="btn btn-default" data-toggle="collapse"
                         data-target="#kartholder" onclick="lastKart()">
-                    <span aria-label="kart" class="glyphicon glyphicon-globe"></span>
+                    <i aria-label="kart" class="fa fa-map"></i>
                     Kart
                 </button>
             </span>
@@ -72,9 +72,9 @@
                     {# TODO: error at site load if no query #}
                     var desc = sortedby % 2;
                     if (desc) {
-                        $("#o_" + (sortedby - desc)).addClass("glyphicon glyphicon-triangle-bottom");
+                        $("#o_" + (sortedby - desc)).addClass("fa fa-sort-desc");
                     } else {
-                        $("#o_" + (sortedby)).addClass("glyphicon glyphicon-triangle-top");
+                        $("#o_" + (sortedby)).addClass("fa fa-sort-asc");
                     }
                 }
             });
