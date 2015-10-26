@@ -27,7 +27,7 @@
     {% endfor %}
     </tbody>
 </table>
-<nav>
+<nav class="pagination-nav">
     <ul class="pagination">
         {% if produkter.has_previous %}
             <li><a onclick="return page({{ produkter.previous_page_number }})" href="#" aria-label="Previous">

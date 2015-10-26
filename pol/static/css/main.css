@@ -26,7 +26,12 @@
     display: none;
 }
 
-#table {
+#table table {
+    margin-bottom: 0;
+}
+
+.pagination-nav .pagination {
+    margin: 0;
 }
 
 #produktinfo {
@@ -112,5 +117,9 @@
 
 .pagination li a {
     width: 3em;
+    text-align: center;
+}
+
+.pagination-nav {
     text-align: center;
 }
