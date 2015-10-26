@@ -1,12 +1,14 @@
 <table class="table table-striped">
-    <thead><tr>
+    <thead>
+    <tr>
         <th class="tablesort" onclick="sort(10)"><i id="o_10" class="fa fa-sort"></i>Navn</th>
         <th class="tablesort" onclick="sort(8)"><i id="o_8" class="fa fa-sort"></i>Type</th>
         <th class="tablesort" onclick="sort(6)"><i id="o_6" class="fa fa-sort"></i>Pris</th>
         <th class="tablesort" onclick="sort(4)"><i id="o_4" class="fa fa-sort"></i>Volum</th>
         <th class="tablesort" onclick="sort(2)"><i id="o_2" class="fa fa-sort"></i>Alkohol</th>
         <th class="tablesort" onclick="sort(0)"><i id="o_0" class="fa fa-sort"></i>Alkoholpris</th>
-    </tr></thead>
+    </tr>
+    </thead>
     <tbody>
     {% for produkt in produkter %}
         <tr class="produkt" onclick="utvid({{ produkt.varenummer }})">
@@ -28,27 +30,42 @@
 <nav>
     <ul class="pagination">
         {% if produkter.has_previous %}
-            <li><a onclick="return page({{ produkter.previous_page_number }})" href="#"
+            <li><a onclick="return page({{ produkter.previous_page_number }})" href="#" aria-label="Previous">
         {% else %}
-            <li class="disabled"><a
+            <li class="disabled"><a aria-label="Previous">
         {% endif %}
-        aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
+        <span aria-hidden="true">&laquo;</span>
         </a>
         </li>
-        {% for pagenumber in produkter.paginator.page_range %}
-            <li id="sidenummer_{{ pagenumber }}"><a href="#"
-                                                    onclick="return page({{ pagenumber }})">{{ pagenumber }}</a></li>
+        {% for n in produkter.paginator.page_range %}
+            <li id="sidenummer_{{ n }}" class="sidenummer"><a href="#"
+                                                              onclick="return page({{ n }})">{{ n }}</a></li>
         {% endfor %}
         {% if produkter.has_next %}
-            <li><a onclick="return page({{ produkter.next_page_number }})" href="#"
+            <li><a onclick="return page({{ produkter.next_page_number }})" href="#" aria-label="Next">
         {% else %}
-            <li class="disabled"><a
+            <li class="disabled"><a aria-label="Next">
         {% endif %}
-        aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
+        <span aria-hidden="true">&raquo;</span>
         </a>
         </li>
     </ul>
 </nav>
-<script>$('#sidenummer_{{ produkter.number }}').addClass('active');</script>
+<script>
+    var active = {{ produkter.number }};
+    var count = {{ produkter.paginator.num_pages }};
+    var start = 0;
+    var end = 12;
+    $('#sidenummer_' + active).addClass('active');
+    if (count > 12) {
+        if (active > 6) {
+            end = Math.min(active + 6, count);
+            start = Math.max(active - 6, 0);
+        }
+        if (count - active < 6) {
+            start = count - 12;
+        }
+        console.log(count - active);
+        $('.sidenummer').hide().slice(start, end).show();
+    }
+</script>
