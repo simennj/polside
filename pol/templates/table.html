@@ -12,12 +12,12 @@
     <tbody>
     {% for produkt in produkter %}
         <tr class="produkt" onclick="utvid({{ produkt.varenummer }})">
-            <td>{{ produkt.varenavn }}</td>
-            <td>{{ produkt.varetype }}</td>
-            <td>{{ produkt.pris }}.-</td>
-            <td>{{ produkt.volum }}l</td>
-            <td>{{ produkt.alkohol }}%</td>
-            <td>{{ produkt.enhetspris }}kr/cl</td>
+            <td class="varenavn-td">{{ produkt.varenavn }}</td>
+            <td class="varetype-td">{{ produkt.varetype }}</td>
+            <td class="pris-td">{{ produkt.pris }}.-</td>
+            <td class="volum-td">{{ produkt.volum }}l</td>
+            <td class="alkohol-td">{{ produkt.alkohol }}%</td>
+            <td class="enhetspris-td">{{ produkt.enhetspris }}kr/cl</td>
         </tr>
         <tr>
             <td colspan="6" id="produktinfo">

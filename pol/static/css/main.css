@@ -45,6 +45,16 @@
     overflow: hidden;
 }
 
+.produkt td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.varenavn-td {
+    max-width: 300px;
+}
+
 .produkt:hover td {
     background-color: white;
 }
@@ -123,4 +133,22 @@
 
 .pagination-nav {
     text-align: center;
+}
+
+@media (max-width: 1200px) and (min-width: 991px) {
+    .varenavn-td {
+        max-width: 200px;
+    }
+
+    .varetype-td {
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 768px ) {
+
+    .varenavn-td {
+        max-width: 200px;
+    }
+
 }
