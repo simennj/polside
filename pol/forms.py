@@ -69,7 +69,7 @@ class EnhetsprisForm(forms.Form):
 
 
 class Butikkategoriform(forms.Form):
-    butikkategori = forms.CharField(label='', widget=forms.TextInput(
+    butikkategori = forms.CharField(label='', required=False, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Kategori 1-7'}))
 
 class SorteringsForm(forms.Form):
