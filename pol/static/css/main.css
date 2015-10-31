@@ -57,7 +57,7 @@
 
 .produkt:hover td {
     background-color: white;
-    white-space: normal;
+    white-space: normal !important;
 }
 
 .produktdiv {
