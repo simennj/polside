@@ -14,9 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.http import HttpResponse
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
+    url(r'^google089c2d1580aaed24.html$',
+        lambda request: HttpResponse('google-site-verification: google089c2d1580aaed24.html')),
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', RedirectView.as_view(url='pol/', permanent=False)),
     url(r'^pol/', include('pol.urls')),
