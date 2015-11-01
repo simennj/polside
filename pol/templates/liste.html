@@ -4,6 +4,21 @@
 {% endblock css %}
 {% block sidebar %}
     <form class="filterform">
+        <div class="input-group"><span class="input-group-addon form-label">Varenavn</span>{{ varenavnform }}</div>
+        <div class="input-group tofelts">
+            <span class="input-group-addon form-label">Pris</span>{{ prisform }}</div>
+        <div class="input-group tofelts">
+            <span class="input-group-addon form-label">Volum</span>{{ volumform }}</div>
+        <div class="input-group tofelts">
+            <span class="input-group-addon form-label">Alkohol</span>{{ alkoholform }}</div>
+        <div class="input-group tofelts">
+            <span class="input-group-addon form-label">Alkoholpris</span>{{ enhetsprisform }}</div>
+        <div class="input-group">
+            <span class="input-group-addon form-label">Varetyper</span>{{ varetypeform }}
+        </div>
+        <div class="input-group hidden">
+            <label for="side"></label><input id="side" name="side">
+        </div>
         <div class="input-group">
             <span class="input-group-addon form-label">Butikk</span>
             {{ butikkategoriform }}
@@ -17,21 +32,6 @@
         </div>
         <div id="kartholder" class="collapse">
             <div id="kart"></div>
-        </div>
-        <div class="input-group"><span class="input-group-addon form-label">Varenavn</span>{{ varenavnform }}</div>
-        <div class="input-group tofelts">
-            <span class="input-group-addon form-label">Pris</span>{{ prisform }}</div>
-        <div class="input-group tofelts">
-            <span class="input-group-addon form-label">Volum</span>{{ volumform }}</div>
-        <div class="input-group tofelts">
-            <span class="input-group-addon form-label">Alkohol</span>{{ alkoholform }}</div>
-        <div class="input-group tofelts">
-            <span class="input-group-addon form-label">Alkoholpris</span>{{ enhetsprisform }}</div>
-        <div class="input-group">
-            {{ varetypeform }}
-        </div>
-        <div class="input-group hidden">
-            <input id="side" name="side">
         </div>
         <div id="sorteringsform" class="input-group hidden">
             {{ sorteringsform }}
@@ -55,7 +55,7 @@
             loadTable();
             $(".filterform").change(updateTable);
             $('#id_varetype').select2({
-                placeholder: 'Varetype',
+                placeholder: 'Velg varetyper',
                 width: '100%'
             });
         });

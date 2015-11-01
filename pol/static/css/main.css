@@ -112,6 +112,8 @@
 .select2-container--default .select2-selection--multiple {
     border: 1px solid #ccc;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .select2-container--default.select2-container--focus .select2-selection--multiple {
