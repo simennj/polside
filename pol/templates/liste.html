@@ -45,43 +45,55 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <script type="text/javascript">
 
-        window.onpopstate = function () {
-            // TODO: history.go(0);
+        window.onpopstate = function (event) {
+            if (event.state == null) {
+                $('.filterform').find('input').val('');
+                return;
+            }
+            var values = {};
+            $.each(event.state, function (i, field) {
+                values[field.name] = field.value;
+            });
+            $('.filterform').find('input').val(function (index, value) {
+                //console.log(this.name);
+                //console.log(values[this.name]);
+                return values[this.name];
+            });
+            loadTable(true);
         };
 
-        var filterform = $(".filterform").serialize();
+        var filterform = $('.filterform').serialize();
         //var sortedby = filterform.
         $(document).ready(function () {
-            loadTable();
-            $(".filterform").change(updateTable);
+            loadTable(true); // TODO: sometimes load twice
+            $('.filterform').change(loadTable);
             $('#id_varetype').select2({
                 placeholder: 'Velg varetyper',
                 width: '100%'
             });
         });
 
-        function updateTable() {
-            // TODO: history.pushState({}, "asdf", '/pol?' + filterform);
-            loadTable();
-        }
-
-        function loadTable() {
-            filterform = $(".filterform").serialize();
+        function loadTable(nopush) {
+            filterform = $('.filterform').serialize();
+            if (nopush != true) {
+                history.pushState($('.filterform').serializeArray(), 'asdf', '/pol?' + filterform);
+                alert("pushing");
+            }
             $.ajax({
-                type: "GET",
+                type: 'GET',
                 url: '/pol/table',
                 data: filterform,
                 success: function (data) {
                     $('#table').html(data);
                     $('.tablesort span').removeClass();
-                    if ($("#sorteringsform input:checked").attr('id') == undefined) $("#id_o_0").prop("checked", true);
-                    var sortedby = parseInt($("#sorteringsform input:checked").attr('id').split('_')[2]);
+                    if ($('#sorteringsform input:checked').attr('id') == undefined) $('#id_o_0').prop('checked', true);
+                    var sortedby = parseInt($('#sorteringsform input:checked').attr('id').split('_')[2]);
                     {# TODO: error at site load if no query #}
                     var desc = sortedby % 2;
                     if (desc) {
-                        $("#o_" + (sortedby - desc)).addClass("fa fa-sort-desc");
+                        $('#o_' + (sortedby - desc)).addClass('fa fa-sort-desc');
                     } else {
-                        $("#o_" + (sortedby)).addClass("fa fa-sort-asc");
+                        $('#o_' + (sortedby)).addClass('fa fa-sort-asc');
                     }
                 }
             });
@@ -100,7 +112,7 @@
             sistvarenummer = varenummer;
             var vare = $('#' + varenummer);
             $.ajax({
-                type: "GET",
+                type: 'GET',
                 url: '/pol/produkt/' + varenummer,
                 success: function (data) {
                     vare.html(data).slideDown();
@@ -111,10 +123,10 @@
         function sort(query) {//TODO: have to press twice to toggle enhetspris at page load
             var valgt = $('#id_o_' + query);
             if (valgt.is(':checked'))
-                $('#id_o_' + (query + 1)).prop("checked", true);
+                $('#id_o_' + (query + 1)).prop('checked', true);
             else
-                valgt.prop("checked", true);
-            loadTable()
+                valgt.prop('checked', true);
+            loadTable();
         }
 
         function page(number) {
