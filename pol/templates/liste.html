@@ -48,22 +48,23 @@
         window.onpopstate = function (event) {
             if (event.state == null) {
                 $('.filterform').find('input').val('');
-                return;
+            } else {
+                var values = {};
+                $.each(event.state, function (i, field) {
+                    values[field.name] = field.value;
+                });
+                $('.filterform').find('input').val(function () {
+                    //console.log(this.name);
+                    //console.log(values[this.name]);
+                    return values[this.name];
+                });
+                loadTable(true);
             }
-            var values = {};
-            $.each(event.state, function (i, field) {
-                values[field.name] = field.value;
-            });
-            $('.filterform').find('input').val(function (index, value) {
-                //console.log(this.name);
-                //console.log(values[this.name]);
-                return values[this.name];
-            });
-            loadTable(true);
         };
 
-        var filterform = $('.filterform').serialize();
-        //var sortedby = filterform.
+        var ffselector = $('.filterform');
+        var filterform = ffselector.serialize();
+
         $(document).ready(function () {
             loadTable(true); // TODO: sometimes load twice
             $('.filterform').change(loadTable);
@@ -74,9 +75,9 @@
         });
 
         function loadTable(nopush) {
-            filterform = $('.filterform').serialize();
+            filterform = ffselector.serialize();
             if (nopush != true) {
-                history.pushState($('.filterform').serializeArray(), 'asdf', '/pol?' + filterform);
+                history.pushState(ffselector.serializeArray(), 'asdf', '/pol?' + filterform);
                 //alert("pushing");
             }
             $.ajax({
@@ -86,11 +87,7 @@
                 success: function (data) {
                     $('#table').html(data);
                     $('.tablesort span').removeClass();
-                    //if ($('#id_o').attr('id') == undefined) $('#id_o_0').prop('checked', true);
-                    //var sortedby = parseInt($('#sorteringsform input:checked').attr('id').split('_')[2]);
                     var sortedby = $('#id_o')[0].selectedIndex;
-                    //alert(sortedby);
-                    {# TODO: error at site load if no query #}
                     var desc = sortedby % 2;
                     if (desc) {
                         $('#o_' + (sortedby - desc)).addClass('fa fa-sort-desc');
@@ -122,10 +119,11 @@
             });
         }
 
-        function sort(query) {//TODO: have to press twice to toggle enhetspris at page load
-            var valgt = $('#id_o option').eq(query);
+        function sort(query) {
+            var valgtselector = $('#id_o').find('option');
+            var valgt = valgtselector.eq(query);
             if (valgt.is(':selected'))
-                $('#id_o option').eq(query + 1).prop('selected', true);
+                valgtselector.eq(query + 1).prop('selected', true);
             else
                 valgt.prop('selected', true);
             loadTable();
