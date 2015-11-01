@@ -49,11 +49,18 @@
             if (event.state == null) {
                 $('.filterform').find('input').val('');
             } else {
+                console.log(event.state);
                 var values = {};
+                var varetyper = [];
                 $.each(event.state, function (i, field) {
-                    values[field.name] = field.value;
+                    if (field.name == 'varetype') {
+                        varetyper.push(field.value);
+                    } else {
+                        values[field.name] = field.value;
+                    }
                 });
-                console.log(values['o']);
+                console.log(varetyper);
+                $('#id_varetype').val(varetyper).trigger("change"); // TODO: update without calling updateTable through filterform.change
                 $('.filterform').find('input').val(function () {
                     return values[this.name];
                 });
@@ -78,7 +85,6 @@
             filterform = ffselector.serialize();
             if (nopush != true) {
                 history.pushState(ffselector.serializeArray(), 'asdf', '/pol?' + filterform);
-                //alert("pushing");
             }
             $.ajax({
                 type: 'GET',
