@@ -87,8 +87,8 @@ class SorteringsForm(forms.Form):
         ('varenavn', 'varenavn'),
         ('-varenavn', '-varenavn'),
     )
-    o = forms.MultipleChoiceField(
+    o = forms.ChoiceField(
         choices=CHOICES,
-        widget=forms.RadioSelect(),
-        label='Sorter etter:',
+        label='',
+        required=False
     )
