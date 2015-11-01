@@ -40,7 +40,7 @@ class VaretypeForm(forms.Form):
         ('Genever', 'Genever'),
         ('Øvrig Svakvin', 'Øvrig Svakvin'),
     )
-    varetype = forms.MultipleChoiceField(label='', choices=CHOICES, widget=forms.CheckboxSelectMultiple(),
+    varetype = forms.MultipleChoiceField(label='', choices=CHOICES, widget=forms.SelectMultiple(),
                                          required=False)
 
 

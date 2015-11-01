@@ -24,22 +24,23 @@
             <span class="input-group-addon form-label">Alkohol</span>{{ alkoholform }}</div>
         <div class="input-group tofelts">
             <span class="input-group-addon form-label">Alkoholpris</span>{{ enhetsprisform }}</div>
-        <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#varetypeform">
-            Varetyper
-        </button>
-        <div id="varetypeform" class="collapse">
-            {% for v in varetypeform.varetype %}<label class="btn btn-default varetype">{{ v }}</label>{% endfor %}
-            <a class="btn btn-link" data-toggle="collapse" data-target="#varetypeform">Skjul</a>
+        <div class="input-group">
+            {{ varetypeform }}
         </div>
-        <div class="clear_both"></div>
-        <div class="input-group hidden"><input id="side" name="side"></div>
-        <div id="sorteringsform" class="input-group hidden">{{ sorteringsform }}</div>
+        <div class="input-group hidden">
+            <input id="side" name="side">
+        </div>
+        <div id="sorteringsform" class="input-group hidden">
+            {{ sorteringsform }}
+        </div>
     </form>
 {% endblock sidebar %}
 {% block content %}
     <div id="table" class="table-responsive"></div>
 {% endblock content %}
 {% block scripts %}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <script>
 
         window.onpopstate = function () {
@@ -51,6 +52,10 @@
         $(document).ready(function () {
             loadTable();
             $(".filterform").change(updateTable);
+            $('#id_varetype').select2({
+                placeholder: 'Varetype',
+                width: '100%'
+            });
         });
 
         function updateTable() {

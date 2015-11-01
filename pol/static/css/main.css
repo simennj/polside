@@ -92,8 +92,21 @@
     height: 100%;
 }
 
-#varetypebeholder {
-    padding: 0;
+#varetype {
+}
+
+.select2 {
+    max-width: 100% !important;
+}
+
+.input-group .select2-container {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+    display: table;
+    table-layout: fixed;
 }
 
 .form-label {
