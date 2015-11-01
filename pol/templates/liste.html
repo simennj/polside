@@ -33,7 +33,7 @@
         <div id="kartholder" class="collapse">
             <div id="kart"></div>
         </div>
-        <div id="sorteringsform" class="input-group">
+        <div id="sorteringsform" class="input-group hidden">
             {{ sorteringsform }}
         </div>
     </form>
@@ -53,11 +53,11 @@
                 $.each(event.state, function (i, field) {
                     values[field.name] = field.value;
                 });
+                console.log(values['o']);
                 $('.filterform').find('input').val(function () {
-                    //console.log(this.name);
-                    //console.log(values[this.name]);
                     return values[this.name];
                 });
+                $('#id_o').val(values['o']);
                 loadTable(true);
             }
         };
