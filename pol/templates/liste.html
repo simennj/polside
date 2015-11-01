@@ -17,7 +17,7 @@
             <span class="input-group-addon form-label">Varetyper</span>{{ varetypeform }}
         </div>
         <div class="input-group hidden">
-            <label for="side"></label><input id="side" name="side">
+            <label for="side"></label><input id="side" name="side" value="{{ side }}">
         </div>
         <div class="input-group">
             <span class="input-group-addon form-label">Butikk</span>
@@ -43,7 +43,7 @@
 {% endblock content %}
 {% block scripts %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-    <script>
+    <script type="text/javascript">
 
         window.onpopstate = function () {
             // TODO: history.go(0);

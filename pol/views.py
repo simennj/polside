@@ -16,6 +16,7 @@ def liste(request):
     enhetsprisform = EnhetsprisForm(request.GET)
     sorteringsform = SorteringsForm(request.GET)
     butikkategoriform = Butikkategoriform(request.GET)
+    side = request.GET.get('side')
     return render_to_response('liste.html', {
         'varenavnform': varenavnform,
         'varetypeform': varetypeform,
@@ -25,6 +26,7 @@ def liste(request):
         'enhetsprisform': enhetsprisform,
         'sorteringsform': sorteringsform,
         'butikkategoriform': butikkategoriform,
+        'side': side,
     })
 
 
