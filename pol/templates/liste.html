@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block css %}
-    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css"/>
 {% endblock css %}
 {% block sidebar %}
     <form class="filterform">
@@ -42,12 +42,13 @@
     <div id="table" class="table-responsive"></div>
 {% endblock content %}
 {% block scripts %}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <script type="text/javascript">
 
         window.onpopstate = function (event) {
             if (event.state == null) {
                 $('.filterform').find('input').val('');
+                $('.selectpicker').selectpicker('deselectAll');
+                loadTable(true);
             } else {
                 console.log(event.state);
                 var values = {};
@@ -59,8 +60,7 @@
                         values[field.name] = field.value;
                     }
                 });
-                console.log(varetyper);
-                $('#id_varetype').val(varetyper).trigger("change"); // TODO: update without calling updateTable through filterform.change
+                $('.selectpicker').selectpicker('val', varetyper);
                 $('.filterform').find('input').val(function () {
                     return values[this.name];
                 });
@@ -75,10 +75,6 @@
         $(document).ready(function () {
             loadTable(true); // TODO: sometimes load twice
             $('.filterform').change(loadTable);
-            $('#id_varetype').select2({
-                placeholder: 'Velg varetyper',
-                width: '100%'
-            });
         });
 
         function loadTable(nopush) {
@@ -143,8 +139,7 @@
 
     </script>
 
-    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css"/>
-    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script async src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     <script>
         function lastKart() {
             if ($('#kart').html().length == 0) {

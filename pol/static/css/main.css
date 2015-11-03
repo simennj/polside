@@ -122,6 +122,15 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
 }
 
+.bootstrap-select {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+    display: table;
+    table-layout: fixed;
+}
+
 .form-label {
     width: 7em;
 }
