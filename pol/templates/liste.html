@@ -80,11 +80,11 @@
         function loadTable(nopush) {
             filterform = ffselector.serialize();
             if (nopush != true) {
-                history.pushState(ffselector.serializeArray(), 'asdf', '/pol?' + filterform);
+                history.pushState(ffselector.serializeArray(), 'asdf', '/?' + filterform);
             }
             $.ajax({
                 type: 'GET',
-                url: '/pol/table',
+                url: '/table',
                 data: filterform,
                 success: function (data) {
                     $('#table').html(data);
@@ -114,7 +114,7 @@
             var vare = $('#' + varenummer);
             $.ajax({
                 type: 'GET',
-                url: '/pol/produkt/' + varenummer,
+                url: '/produkt/' + varenummer,
                 success: function (data) {
                     vare.html(data).slideDown();
                 }
