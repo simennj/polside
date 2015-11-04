@@ -75,6 +75,7 @@
         $(document).ready(function () {
             loadTable(true); // TODO: sometimes load twice
             $('.filterform').change(loadTable);
+            $('.selectpicker').selectpicker('mobile');
         });
 
         function loadTable(nopush) {
