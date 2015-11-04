@@ -131,6 +131,21 @@
     table-layout: fixed;
 }
 
+.dropdown-menu {
+    max-width: 100%;
+}
+
+.inner li {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.inner li a span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+}
+
 .form-label {
     width: 7em;
 }
