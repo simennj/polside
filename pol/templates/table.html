@@ -1,3 +1,4 @@
+<div class="table-responsive">
 <table class="table table-striped">
     <thead>
     <tr>
@@ -27,6 +28,7 @@
     {% endfor %}
     </tbody>
 </table>
+</div>
 <nav class="pagination-nav">
     <ul class="pagination">
         {% if produkter.has_previous %}
@@ -51,7 +53,7 @@
         </li>
     </ul>
 </nav>
-<script>
+<script>    //TODO: seperate into list.html
     var active = {{ produkter.number }};
     var count = {{ produkter.paginator.num_pages }};
     var start = 0;
