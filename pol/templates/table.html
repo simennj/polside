@@ -53,20 +53,6 @@
         </li>
     </ul>
 </nav>
-<script>    //TODO: seperate into list.html
-    var active = {{ produkter.number }};
-    var count = {{ produkter.paginator.num_pages }};
-    var start = 0;
-    var end = 12;
-    $('#sidenummer_' + active).addClass('active');
-    if (count > 12) {
-        if (active > 6) {
-            end = Math.min(active + 6, count);
-            start = Math.max(active - 6, 0);
-        }
-        if (count - active < 6) {
-            start = count - 12;
-        }
-        $('.sidenummer').hide().slice(start, end).show();
-    }
+<script>
+    paginationNavigation({{ produkter.number }}, {{ produkter.paginator.num_pages }});
 </script>
