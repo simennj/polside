@@ -146,8 +146,12 @@
     max-width: 100%;
 }
 
-.form-label {
+.form-label-name {
     width: 7em;
+}
+
+.form-label-unit {
+    width: 4em;
 }
 
 #kartknapp {

@@ -1,23 +1,27 @@
 {% extends "base.html" %}
 {% block sidebar %}
     <form class="filterform">
-        <div class="input-group"><span class="input-group-addon form-label">Varenavn</span>{{ varenavnform }}</div>
+        <div class="input-group"><span class="input-group-addon form-label-name">Varenavn</span>{{ varenavnform }}</div>
         <div class="input-group tofelts">
-            <span class="input-group-addon form-label">Pris</span>{{ prisform }}</div>
+            <span class="input-group-addon form-label-name">Pris</span>{{ prisform }}<span
+                class="input-group-addon form-label-unit">kr</span></div>
         <div class="input-group tofelts">
-            <span class="input-group-addon form-label">Volum</span>{{ volumform }}</div>
+            <span class="input-group-addon form-label-name">Volum</span>{{ volumform }}<span
+                class="input-group-addon form-label-unit">cl</span></div>
         <div class="input-group tofelts">
-            <span class="input-group-addon form-label">Alkohol</span>{{ alkoholform }}</div>
+            <span class="input-group-addon form-label-name">Alkohol</span>{{ alkoholform }}<span
+                class="input-group-addon form-label-unit">%</span></div>
         <div class="input-group tofelts">
-            <span class="input-group-addon form-label">Alkoholpris</span>{{ enhetsprisform }}</div>
+            <span class="input-group-addon form-label-name">Alkoholpris</span>{{ enhetsprisform }}<span
+                class="input-group-addon form-label-unit">kr/cl</span></div>
         <div class="input-group">
-            <span class="input-group-addon form-label">Varetyper</span>{{ varetypeform }}
+            <span class="input-group-addon form-label-name">Varetyper</span>{{ varetypeform }}
         </div>
         <div class="input-group hidden">
             <label for="side"></label><input id="side" name="side" value="{{ side }}">
         </div>
         <div class="input-group">
-            <span class="input-group-addon form-label">Butikk</span>
+            <span class="input-group-addon form-label-name">Butikk</span>
             {{ butikkategoriform }}
             <span class="input-group-btn">
                 <button id="kartknapp" type="button" class="btn btn-primary" data-toggle="collapse"
