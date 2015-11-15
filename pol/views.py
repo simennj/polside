@@ -19,6 +19,8 @@ def liste(request):
     land = LandForm(request.GET)
     produsent = ProdusentForm(request.GET)
     side = request.GET.get('side')
+    if side is None:
+        side = ""
     return render_to_response('liste.html', {
         'varenavnform': varenavnform,
         'varetypeform': varetypeform,

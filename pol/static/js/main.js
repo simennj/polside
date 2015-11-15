@@ -32,7 +32,9 @@ $(document).ready(function () {
 });
 
 function loadTable(nopush) {
-    filterform = ffselector.serialize();
+    filterform = ffselector.find(':input').filter(function () {
+        return $.trim(this.value).length > 0;
+    }).serialize();
     if (nopush != true) {
         history.pushState(ffselector.serializeArray(), 'asdf', '/?' + filterform);
     }
