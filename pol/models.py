@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models
 import django_filters
+from django.db import models
 from django.db.models import Lookup
 
 
@@ -58,7 +58,7 @@ class Produkter(models.Model):
     vareurl = models.CharField(db_column='Vareurl', max_length=61, blank=True, null=True)
     enhetspris = models.DecimalField(db_column='Enhetspris', max_digits=7, decimal_places=2, blank=True, null=True)
 
-    butikkategori.register_lookup(Butikkategorilookup)
+    butikkategori.register_lookup(Butikkategorilookup)  # TODO: kan denne fjernes?
 
     class Meta:
         db_table = 'produkter'
@@ -117,6 +117,8 @@ class ProduktFilter(django_filters.FilterSet):
     alkohol = django_filters.RangeFilter()
     enhetspris = django_filters.RangeFilter()
     butikkategori = django_filters.CharFilter(lookup_type='bkat')
+    land = django_filters.CharFilter(lookup_type='icontains')
+    produsent = django_filters.CharFilter(lookup_type='icontains')
 
     class Meta:
         fields = (
@@ -126,7 +128,9 @@ class ProduktFilter(django_filters.FilterSet):
             'volum',
             'alkohol',
             'enhetspris',
-            'butikkategori'
+            'butikkategori',
+            'land',
+            'produsent'
         )
         order_by = (
             'enhetspris',

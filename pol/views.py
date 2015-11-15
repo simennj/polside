@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.views import generic
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from pol.forms import *
 from pol.models import *
@@ -16,6 +16,8 @@ def liste(request):
     enhetsprisform = EnhetsprisForm(request.GET)
     sorteringsform = SorteringsForm(request.GET)
     butikkategoriform = Butikkategoriform(request.GET)
+    land = LandForm(request.GET)
+    produsent = ProdusentForm(request.GET)
     side = request.GET.get('side')
     return render_to_response('liste.html', {
         'varenavnform': varenavnform,
@@ -26,7 +28,9 @@ def liste(request):
         'enhetsprisform': enhetsprisform,
         'sorteringsform': sorteringsform,
         'butikkategoriform': butikkategoriform,
-        'side': side,
+        'landform': land,
+        'produsentform': produsent,
+        'side': side
     })
 
 

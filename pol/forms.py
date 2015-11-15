@@ -70,9 +70,20 @@ class EnhetsprisForm(forms.Form):
     enhetspris_1 = forms.DecimalField(min_value=0, label='', required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Maks'}))
 
 
+class LandForm(forms.Form):
+    land = forms.CharField(label='', required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Søk'}))
+
+
+class ProdusentForm(forms.Form):
+    produsent = forms.CharField(label='', required=False, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Søk'}))
+
+
 class Butikkategoriform(forms.Form):
     butikkategori = forms.CharField(label='', required=False, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Kategori 1-7'}))
+
 
 class SorteringsForm(forms.Form):
     CHOICES = (
