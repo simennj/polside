@@ -32,7 +32,8 @@
 <nav class="pagination-nav">
     <ul class="pagination">
         {% if produkter.has_previous %}
-            <li><a onclick="return page({{ produkter.previous_page_number }})" href="#" aria-label="Previous">
+            <li><a onclick="return page({{ produkter.previous_page_number }})" href="#" aria-label="Previous"
+                   rel=”prev”>
         {% else %}
             <li class="disabled"><a aria-label="Previous">
         {% endif %}
@@ -44,7 +45,7 @@
                                                               onclick="return page({{ n }})">{{ n }}</a></li>
         {% endfor %}
         {% if produkter.has_next %}
-            <li><a onclick="return page({{ produkter.next_page_number }})" href="#" aria-label="Next">
+            <li><a onclick="return page({{ produkter.next_page_number }})" href="#" aria-label="Next" rel=”next”>
         {% else %}
             <li class="disabled"><a aria-label="Next">
         {% endif %}
