@@ -31,9 +31,9 @@
 </div>
 <nav class="pagination-nav">
     <ul class="pagination">
-        {% if produkter.has_previous %}
+        {% if produkter.has_previous %} {# TODO: python pagination? #}
             <li><a onclick="return page({{ produkter.previous_page_number }})" href="#" aria-label="Previous"
-                   rel=”prev”>
+                   rel="prev">
         {% else %}
             <li class="disabled"><a aria-label="Previous">
         {% endif %}
@@ -45,7 +45,7 @@
                                                               onclick="return page({{ n }})">{{ n }}</a></li>
         {% endfor %}
         {% if produkter.has_next %}
-            <li><a onclick="return page({{ produkter.next_page_number }})" href="#" aria-label="Next" rel=”next”>
+            <li><a onclick="return page({{ produkter.next_page_number }})" href="#" aria-label="Next" rel="next">
         {% else %}
             <li class="disabled"><a aria-label="Next">
         {% endif %}
