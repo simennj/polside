@@ -2,9 +2,15 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.views import generic
+from rest_framework import filters
+from rest_framework import generics
+from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from pol.forms import *
 from pol.models import *
+from pol.serializers import ProduktSerializer
 
 
 def liste(request):
@@ -51,6 +57,27 @@ def table(request):
     return render_to_response('table.html', {
         'produkter': produkter,
     })
+
+
+class TestViewSet(generics.ListAPIView):
+    queryset = Produkter.objects.filter(produktutvalg__contains="Ba")
+    serializer = ProduktSerializer
+    serializer_class = serializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = ProduktFilter
+    #pagination_class = LargeResultsSetPagination
+#    def get(self, request, format=None):
+#        f = ProduktFilter(request.GET, queryset=Produkter.objects.filter(produktutvalg__contains="Ba"))
+#        paginator = Paginator(f, 5)
+#        side = request.GET.get('side')
+#        try:
+#            produkter = paginator.page(side)
+#        except PageNotAnInteger:
+#            produkter = paginator.page(1)
+#        except EmptyPage:
+#            produkter = paginator.page(paginator.num_pages)
+#        serializer = ProduktSerializer(produkter, many=True)
+#        return Response(serializer.data)
 
 
 class Produktside(generic.DetailView):

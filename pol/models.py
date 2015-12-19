@@ -109,7 +109,6 @@ class ProduktFilter(django_filters.FilterSet):
         ('Genever', 'Genever'),
         ('Øvrig Svakvin', 'Øvrig Svakvin'),
     )
-    model = Produkter
     varetype = django_filters.MultipleChoiceFilter(choices=CHOICES)
     varenavn = django_filters.CharFilter(lookup_type='icontains')
     pris = django_filters.RangeFilter()
@@ -121,6 +120,7 @@ class ProduktFilter(django_filters.FilterSet):
     produsent = django_filters.CharFilter(lookup_type='icontains')
 
     class Meta:
+        model = Produkter
         fields = (
             'varenavn',
             'varetype',

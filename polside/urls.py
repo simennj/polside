@@ -17,6 +17,9 @@ from django.conf.urls import include, url
 from django.http import HttpResponse
 from django.views.generic.base import RedirectView
 
+from pol import views
+
+
 urlpatterns = [
     url(r'^google089c2d1580aaed24.html$',
         lambda request: HttpResponse('google-site-verification: google089c2d1580aaed24.html')),
@@ -24,4 +27,6 @@ urlpatterns = [
     url(r'^pol/', RedirectView.as_view(url='/', permanent=False)),
     url(r'^', include('pol.urls')),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/$', views.TestViewSet.as_view()),
 ]
