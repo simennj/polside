@@ -26,7 +26,7 @@ class BolItems(models.Model):
     country = models.CharField(max_length=23, blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     volume = models.DecimalField(max_digits=5, decimal_places=1)
-    alcohol = models.DecimalField(max_digits=2, decimal_places=2)
+    alcohol = models.DecimalField(max_digits=4, decimal_places=2)
     alcoholPrice = models.DecimalField(max_digits=6, decimal_places=2)
 
 
