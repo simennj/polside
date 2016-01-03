@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 import django_filters
 from django.db import models
 from django.db.models import Lookup
@@ -17,6 +16,18 @@ class Butikkategorilookup(Lookup):
         params = lhs_params + rhs_params
         return '%s <= %s' % (lhs, rhs), params
         # TODO: Do this properly if i ever learn the API
+
+
+class BolItems(models.Model):
+    nr = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=50)
+    group = models.CharField(max_length=36, blank=True, null=True)
+    producer = models.CharField(max_length=71, blank=True, null=True)
+    country = models.CharField(max_length=23, blank=True, null=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
+    volume = models.DecimalField(max_digits=5, decimal_places=1)
+    alcohol = models.DecimalField(max_digits=2, decimal_places=2)
+    alcoholPrice = models.DecimalField(max_digits=6, decimal_places=2)
 
 
 class Produkter(models.Model):
@@ -72,7 +83,7 @@ class Produkter(models.Model):
 
     def pris_per_enhet(self):
         if self.alkohol > 0:
-            return self.literpris/self.alkohol
+            return self.literpris / self.alkohol
         return 9000.01
 
 
@@ -148,30 +159,32 @@ class ProduktFilter(django_filters.FilterSet):
         )
 
 
-class Butikker(models.Model):
-    datotid = models.CharField(db_column='Datotid', max_length=19, blank=True, null=True)
-    butikknavn = models.CharField(db_column='Butikknavn', max_length=31, blank=True, null=True)
-    gateadresse = models.CharField(db_column='Gateadresse', max_length=37, blank=True, null=True)
-    gate_postnummer = models.IntegerField(db_column='Gate_postnummer', blank=True, null=True)
-    gate_poststed = models.CharField(db_column='Gate_poststed', max_length=17, blank=True, null=True)
-    postadresse = models.CharField(db_column='Postadresse', max_length=37, blank=True, null=True)
-    post_postnummer = models.IntegerField(db_column='Post_postnummer', blank=True, null=True)
-    post_poststed = models.CharField(db_column='Post_poststed', max_length=17, blank=True, null=True)
-    telefonnummer = models.IntegerField(db_column='Telefonnummer', blank=True, null=True)
-    kategori = models.CharField(db_column='Kategori', max_length=10, blank=True, null=True)
-    gps_breddegrad = models.DecimalField(db_column='GPS_breddegrad', max_digits=12, decimal_places=10, blank=True, null=True)
-    gps_lengdegrad = models.DecimalField(db_column='GPS_lengdegrad', max_digits=12, decimal_places=11, blank=True, null=True)
-    ukenummer = models.IntegerField(db_column='Ukenummer', blank=True, null=True)
-    apn_mandag = models.CharField(db_column='Apn_mandag', max_length=11, blank=True, null=True)
-    apn_tirsdag = models.CharField(db_column='Apn_tirsdag', max_length=11, blank=True, null=True)
-    apn_onsdag = models.CharField(db_column='Apn_onsdag', max_length=11, blank=True, null=True)
-    apn_torsdag = models.CharField(db_column='Apn_torsdag', max_length=11, blank=True, null=True)
-    apn_fredag = models.CharField(db_column='Apn_fredag', max_length=11, blank=True, null=True)
-    apn_lordag = models.CharField(db_column='Apn_lordag', max_length=11, blank=True, null=True)
-    ukenummer_neste = models.IntegerField(db_column='Ukenummer_neste', blank=True, null=True)
-    apn_neste_mandag = models.CharField(db_column='Apn_neste_mandag', max_length=11, blank=True, null=True)
-    apn_neste_tirsdag = models.CharField(db_column='Apn_neste_tirsdag', max_length=11, blank=True, null=True)
-    apn_neste_onsdag = models.CharField(db_column='Apn_neste_onsdag', max_length=11, blank=True, null=True)
-    apn_neste_torsdag = models.CharField(db_column='Apn_neste_torsdag', max_length=11, blank=True, null=True)
-    apn_neste_fredag = models.CharField(db_column='Apn_neste_fredag', max_length=11, blank=True, null=True)
-    apn_neste_lordag = models.CharField(db_column='Apn_neste_lordag', max_length=11, blank=True, null=True)
+#class Butikker(models.Model):
+#    datotid = models.CharField(db_column='Datotid', max_length=19, blank=True, null=True)
+#    butikknavn = models.CharField(db_column='Butikknavn', max_length=31, blank=True, null=True)
+#    gateadresse = models.CharField(db_column='Gateadresse', max_length=37, blank=True, null=True)
+#    gate_postnummer = models.IntegerField(db_column='Gate_postnummer', blank=True, null=True)
+#    gate_poststed = models.CharField(db_column='Gate_poststed', max_length=17, blank=True, null=True)
+#    postadresse = models.CharField(db_column='Postadresse', max_length=37, blank=True, null=True)
+#    post_postnummer = models.IntegerField(db_column='Post_postnummer', blank=True, null=True)
+#    post_poststed = models.CharField(db_column='Post_poststed', max_length=17, blank=True, null=True)
+#    telefonnummer = models.IntegerField(db_column='Telefonnummer', blank=True, null=True)
+#    kategori = models.CharField(db_column='Kategori', max_length=10, blank=True, null=True)
+#    gps_breddegrad = models.DecimalField(db_column='GPS_breddegrad', max_digits=12, decimal_places=10, blank=True,
+#                                         null=True)
+#    gps_lengdegrad = models.DecimalField(db_column='GPS_lengdegrad', max_digits=12, decimal_places=11, blank=True,
+#                                         null=True)
+#    ukenummer = models.IntegerField(db_column='Ukenummer', blank=True, null=True)
+#    apn_mandag = models.CharField(db_column='Apn_mandag', max_length=11, blank=True, null=True)
+#    apn_tirsdag = models.CharField(db_column='Apn_tirsdag', max_length=11, blank=True, null=True)
+#    apn_onsdag = models.CharField(db_column='Apn_onsdag', max_length=11, blank=True, null=True)
+#    apn_torsdag = models.CharField(db_column='Apn_torsdag', max_length=11, blank=True, null=True)
+#    apn_fredag = models.CharField(db_column='Apn_fredag', max_length=11, blank=True, null=True)
+#    apn_lordag = models.CharField(db_column='Apn_lordag', max_length=11, blank=True, null=True)
+#    ukenummer_neste = models.IntegerField(db_column='Ukenummer_neste', blank=True, null=True)
+#    apn_neste_mandag = models.CharField(db_column='Apn_neste_mandag', max_length=11, blank=True, null=True)
+#    apn_neste_tirsdag = models.CharField(db_column='Apn_neste_tirsdag', max_length=11, blank=True, null=True)
+#    apn_neste_onsdag = models.CharField(db_column='Apn_neste_onsdag', max_length=11, blank=True, null=True)
+#    apn_neste_torsdag = models.CharField(db_column='Apn_neste_torsdag', max_length=11, blank=True, null=True)
+#    apn_neste_fredag = models.CharField(db_column='Apn_neste_fredag', max_length=11, blank=True, null=True)
+#    apn_neste_lordag = models.CharField(db_column='Apn_neste_lordag', max_length=11, blank=True, null=True)
