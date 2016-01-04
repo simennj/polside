@@ -28,7 +28,19 @@ class BolItems(models.Model):
     volume = models.DecimalField(max_digits=5, decimal_places=1)
     alcohol = models.DecimalField(max_digits=4, decimal_places=2)
     alcoholPrice = models.DecimalField(max_digits=6, decimal_places=2)
+    url = models.CharField(max_length=100)
 
+
+#class PolItems(models.Model):
+#    nr = models.IntegerField(primary_key=True)
+#    name = models.CharField(max_length=80)
+#    group = models.CharField(max_length=40, blank=True, null=True)
+#    producer = models.CharField(max_length=33, blank=True, null=True)
+#    country = models.CharField(max_length=15, blank=True, null=True)
+#    price = models.DecimalField(max_digits=7, decimal_places=2)
+#    volume = models.DecimalField(max_digits=4, decimal_places=2)
+#    alcohol = models.DecimalField(max_digits=4, decimal_places=2)
+#    alcoholPrice = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
 
 class Produkter(models.Model):
     datotid = models.DateTimeField(db_column='Datotid', blank=True, null=True)

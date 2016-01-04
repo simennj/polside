@@ -59,7 +59,7 @@ def table(request):
     })
 
 
-class TestViewSet(generics.ListAPIView):
+class TestViewSet(generics.ListAPIView):#TODO: page eller side?
     queryset = Produkter.objects.filter(produktutvalg__contains="Ba")
     serializer = ProduktSerializer
     serializer_class = serializer
@@ -87,4 +87,4 @@ class Produktside(generic.DetailView):
 
 class Produktvisning(generic.DetailView):
     model = Produkter
-    template_name = 'produktvisning.html'
+    template_name = 'produktvisning.html' #TODO: smaks"klokker" (bitterhet osv.)
