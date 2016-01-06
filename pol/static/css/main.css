@@ -171,6 +171,10 @@
     width: 50%;
 }
 
+.form-control ~ .form-control {
+    border-left: 0;
+}
+
 .varetype {
     width: 50%;
     margin: 0;
