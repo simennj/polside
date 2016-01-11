@@ -17,6 +17,7 @@
             $scope.varer = data;
         });
         $scope.varefilter = $location.search();
+        if ($scope.varefilter.kategori && !Array.isArray($scope.varefilter.kategori))$scope.varefilter.kategori = [$scope.varefilter.kategori];
 
         $scope.$on('$locationChangeSuccess', function (event, newUrl, oldUrl) {
             $scope.sort = $location.search()['sortering'];
@@ -31,7 +32,6 @@
         };
         $scope.sortStatus = function (value) {
             var sortering = (($scope.varefilter.sortering && $scope.varefilter.sortering.length > 1) ? $scope.varefilter.sortering : "alkoholpris");
-            console.log(sortering);
             if (sortering === value) return '-asc';
             if (sortering.substring(1) === value) return '-desc';
             return '';
@@ -41,16 +41,20 @@
             window.open('http://www.systembolaget.se/dryck/' + url);
         };
         $scope.kategoriToggle = function (kategori) {
-            if (Array.isArray($scope.varefilter['kategori'])) {
-                var i = $scope.varefilter['kategori'].indexOf(kategori);
+            if ($scope.varefilter.kategori) {
+                var i = $scope.varefilter.kategori.indexOf(kategori);
                 if (i === -1) {
-                    $scope.varefilter['kategori'].push(kategori);
+                    $scope.varefilter.kategori.push(kategori);
                 } else {
-                    $scope.varefilter['kategori'].splice(i, 1);
+                    $scope.varefilter.kategori.splice(i, 1);
+                    if ($scope.varefilter.kategori.length === 0) delete $scope.varefilter.kategori;
                 }
             } else {
-                $scope.varefilter['kategori'] = [kategori];
+                $scope.varefilter.kategori = [kategori];
             }
+        };
+        $scope.kategoriSelected = function (kategori) {
+            return ($scope.varefilter.kategori && $scope.varefilter.kategori.indexOf(kategori) === -1 ? '' : '-check');
         };
 
         $scope.kategorier = [
@@ -84,9 +88,9 @@
                 populate = false;
                 var item = items[i];
 
-                if (filterData['kategori'] && item['kategori'] !== filterData['kategori']) {
-                    for (var j = 0; j < filterData['kategori'].length; j++) {
-                        if (item['kategori'] === filterData['kategori'][j]) {
+                if (filterData.kategori && item.kategori !== filterData.kategori) {
+                    for (var j = 0; j < filterData.kategori.length; j++) {
+                        if (item.kategori === filterData.kategori[j]) {
                             populate = true;
                         }
                     }

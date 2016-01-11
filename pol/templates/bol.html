@@ -78,61 +78,26 @@
                                    type="text" ng-model="varefilter.alkoholpris_maks" to-number><span
                                 class="input-group-addon form-label-unit">kr/cl</span></div>
                         <div class="input-group">
-                            <span class="input-group-addon form-label-name">Varetyper</span><select multiple="multiple"
-                                                                                                    class="selectpicker bs-select-hidden"
-                                                                                                    id="id_varetype"
-                                                                                                    name="varetype"
-                                                                                                    title="Velg varetyper"
-                                                                                                    ng-model="varefilter.kategori">
-                            <option id="ol" value="ol">ol</option>
-                            <option value="sprit">sprit</option>
-                            <option value="aperitif-dessert">aperitif-dessert</option>
-                            <option value="mousserande-viner">mousserande-viner</option>
-                            <option value="roda-viner">roda-viner</option>
-                            <option value="cider-och-blanddrycker">cider-och-blanddrycker</option>
-                            <option value="vita-viner">vita-viner</option>
-                            <option value="alkoholfritt">alkoholfritt</option>
-                            <option value="roseviner">roseviner</option>
-                        </select>
-
+                            <span class="input-group-addon form-label-name">Varetyper</span>
                             <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                <button class="btn btn-default dropdown-toggle" type="button" id="kategorier"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     Dropdown
                                     <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <ul id="kategorier" class="dropdown-menu" aria-labelledby="kategorier">
                                     <li ng-repeat="kategori in kategorier" ng-value="kategori"><a href=""
                                                                                                   ng-click="kategoriToggle(kategori)"><i
-                                            class="fa fa-check"></i>{{ kategori }}</a></li>
+                                            ng-class="'fa fa'+kategoriSelected(kategori)+'-square-o'"></i> {{ kategori }}
+                                    </a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div id="sorteringsform" class="input-group">
-                            <select id="id_o" name="o" ng-model="varefilter.sortering">
-                                <option value="alkoholpris">alkoholpris</option>
-                                <option value="-alkoholpris">-alkoholpris</option>
-                                <option value="alkohol">alkohol</option>
-                                <option value="-alkohol">-alkohol</option>
-                                <option value="volum">volum</option>
-                                <option value="-volum">-volum</option>
-                                <option value="pris">pris</option>
-                                <option value="-pris">-pris</option>
-                                <option value="kategori">kategori</option>
-                                <option value="-kategori">-kategori</option>
-                                <option value="navn">navn</option>
-                                <option value="-navn">-navn</option>
-                            </select>
-                        </div>
                     </form>
-                    <pre>{{ vare | json }}</pre>
-                    <pre>{{ kategorifilter | json }}</pre>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="table-responsive">
-                    <pre>{{ varefilter }}</pre>
-                    <pre>{{ varer }}</pre>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -174,6 +139,11 @@
     </div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        $('.dropdown-menu').click(function (event) {
+            event.stopPropagation();
+        });
+    </script>
 {% endverbatim angular %}
 </body>
 </html>
