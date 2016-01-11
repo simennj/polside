@@ -26,7 +26,6 @@
         }, true);
 
         $scope.changeSort = function (value) {
-            alert(value);
             if ($scope.varefilter.sortering === value) $scope.varefilter.sortering = '-' + value;
             else $scope.varefilter.sortering = value;
         };
@@ -41,19 +40,31 @@
         $scope.systembolaget = function (url) {
             window.open('http://www.systembolaget.se/dryck/' + url);
         };
-/*
+        $scope.kategoriToggle = function (kategori) {
+            if (Array.isArray($scope.varefilter['kategori'])) {
+                var i = $scope.varefilter['kategori'].indexOf(kategori);
+                if (i === -1) {
+                    $scope.varefilter['kategori'].push(kategori);
+                } else {
+                    $scope.varefilter['kategori'].splice(i, 1);
+                }
+            } else {
+                $scope.varefilter['kategori'] = [kategori];
+            }
+        };
+
         $scope.kategorier = [
             "ol",
             "sprit",
             "aperitif-dessert",
             "mousserande-viner",
             "roda-viner",
-            "cider-och",
+            "cider-och-blanddrycker",
             "vita-viner",
             "alkoholfritt",
             "roseviner"
         ]
-*/
+
     }]);
     bol.filter('bolFilter', function () {
         return function (items, filterData) {

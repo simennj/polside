@@ -84,16 +84,29 @@
                                                                                                     name="varetype"
                                                                                                     title="Velg varetyper"
                                                                                                     ng-model="varefilter.kategori">
-                            <option value="ol">ol</option>
+                            <option id="ol" value="ol">ol</option>
                             <option value="sprit">sprit</option>
                             <option value="aperitif-dessert">aperitif-dessert</option>
                             <option value="mousserande-viner">mousserande-viner</option>
                             <option value="roda-viner">roda-viner</option>
-                            <option value="cider-och">cider-och</option>
+                            <option value="cider-och-blanddrycker">cider-och-blanddrycker</option>
                             <option value="vita-viner">vita-viner</option>
                             <option value="alkoholfritt">alkoholfritt</option>
                             <option value="roseviner">roseviner</option>
                         </select>
+
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Dropdown
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li ng-repeat="kategori in kategorier" ng-value="kategori"><a href=""
+                                                                                                  ng-click="kategoriToggle(kategori)"><i
+                                            class="fa fa-check"></i>{{ kategori }}</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <div id="sorteringsform" class="input-group">
                             <select id="id_o" name="o" ng-model="varefilter.sortering">
@@ -113,6 +126,7 @@
                         </div>
                     </form>
                     <pre>{{ vare | json }}</pre>
+                    <pre>{{ kategorifilter | json }}</pre>
                 </div>
             </div>
             <div class="col-md-8">
