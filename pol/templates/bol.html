@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="no">
+{% load staticfiles %}
+<html ng-app="bolSide">
+<head>
+    {% include 'header.html' %}
+    <title>Polguide-Åre</title>
+    <script src="{% static 'js/bol.js' %}"></script>
+</head>
+<body>
+{% verbatim angular %}
+    <div class="container-fluid content" ng-controller="BolCtrl as bol">
+        <div class="row">
+            <div class="col-md-4 sidebar">
+                <nav class="navbar">
+                    <div class="navbar-header" style="width: 100%;;">
+                        <a class="navbar-brand" href="/" target="_parent">
+                            <i class="fa fa-glass"></i>
+                            Polguide
+                        </a>
+                        <img style="float: right;" height="50px" src="/static/test.png">
+                    </div>
+                </nav>
+                <div>
+                    <form class="filterform">
+                        <div class="input-group"><span class="input-group-addon form-label-name">Navn</span><input
+                                class="form-control" id="id_varenavn" maxlength="80" name="varenavn" placeholder="Søk"
+                                type="text" ng-model="varefilter.navn"></div>
+                        <div class="input-group"><span class="input-group-addon form-label-name">Land</span><input
+                                class="form-control" id="id_land" name="land" placeholder="Søk" type="text"
+                                ng-model="varefilter.land"></div>
+                        <div class="input-group"><span class="input-group-addon form-label-name">Produsent</span><input
+                                class="form-control" id="id_produsent" name="produsent" placeholder="Søk" type="text"
+                                ng-model="varefilter.produsent">
+                        </div>
+                        <div class="input-group tofelts">
+                            <span class="input-group-addon form-label-name">Pris</span><input class="form-control"
+                                                                                              id="id_pris_min"
+                                                                                              name="pris_min"
+                                                                                              placeholder="Min"
+                                                                                              type="text"
+                                                                                              ng-model="varefilter.pris_min"
+                                                                                              to-number>
+                            <input class="form-control" id="id_pris_maks" name="pris_maks" placeholder="Maks"
+                                   type="text" ng-model="varefilter.pris_maks" to-number><span
+                                class="input-group-addon form-label-unit">kr</span></div>
+                        <div class="input-group tofelts">
+                            <span class="input-group-addon form-label-name">Volum</span><input class="form-control"
+                                                                                               id="id_volum_min"
+                                                                                               name="volum_min"
+                                                                                               placeholder="Min"
+                                                                                               type="text"
+                                                                                               ng-model="varefilter.volum_min"
+                                                                                               to-number>
+                            <input class="form-control" id="id_volum_maks" name="volum_maks" placeholder="Maks"
+                                   type="text" ng-model="varefilter.volum_maks" to-number><span
+                                class="input-group-addon form-label-unit">l</span></div>
+                        <div class="input-group tofelts">
+                            <span class="input-group-addon form-label-name">Alkohol</span><input class="form-control"
+                                                                                                 id="id_alkohol_min"
+                                                                                                 name="alkohol_min"
+                                                                                                 placeholder="Min"
+                                                                                                 type="text"
+                                                                                                 ng-model="varefilter.alkohol_min"
+                                                                                                 to-number>
+                            <input class="form-control" id="id_alkohol_maks" name="alkohol_maks" placeholder="Maks"
+                                   type="text" ng-model="varefilter.alkohol_maks" to-number><span
+                                class="input-group-addon form-label-unit">%</span></div>
+                        <div class="input-group tofelts">
+                            <span class="input-group-addon form-label-name">Alkoholpris</span><input
+                                class="form-control"
+                                id="id_enhetspris_min"
+                                name="enhetspris_min"
+                                placeholder="Min"
+                                type="text" ng-model="varefilter.alkoholpris_min" to-number>
+                            <input class="form-control" id="id_enhetspris_maks" name="enhetspris_maks"
+                                   placeholder="Maks"
+                                   type="text" ng-model="varefilter.alkoholpris_maks" to-number><span
+                                class="input-group-addon form-label-unit">kr/cl</span></div>
+                        <div class="input-group">
+                            <span class="input-group-addon form-label-name">Varetyper</span><select multiple="multiple"
+                                                                                                    class="selectpicker bs-select-hidden"
+                                                                                                    id="id_varetype"
+                                                                                                    name="varetype"
+                                                                                                    title="Velg varetyper"
+                                                                                                    ng-model="varefilter.kategori">
+                            <option value="ol">ol</option>
+                            <option value="sprit">sprit</option>
+                            <option value="aperitif-dessert">aperitif-dessert</option>
+                            <option value="mousserande-viner">mousserande-viner</option>
+                            <option value="roda-viner">roda-viner</option>
+                            <option value="cider-och">cider-och</option>
+                            <option value="vita-viner">vita-viner</option>
+                            <option value="alkoholfritt">alkoholfritt</option>
+                            <option value="roseviner">roseviner</option>
+                        </select>
+                        </div>
+                        <div id="sorteringsform" class="input-group">
+                            <select id="id_o" name="o" ng-model="varefilter.sortering">
+                                <option value="alkoholpris">alkoholpris</option>
+                                <option value="-alkoholpris">-alkoholpris</option>
+                                <option value="alkohol">alkohol</option>
+                                <option value="-alkohol">-alkohol</option>
+                                <option value="volum">volum</option>
+                                <option value="-volum">-volum</option>
+                                <option value="pris">pris</option>
+                                <option value="-pris">-pris</option>
+                                <option value="kategori">kategori</option>
+                                <option value="-kategori">-kategori</option>
+                                <option value="navn">navn</option>
+                                <option value="-navn">-navn</option>
+                            </select>
+                        </div>
+                    </form>
+                    <pre>{{ vare | json }}</pre>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="table-responsive">
+                    <pre>{{ varefilter }}</pre>
+                    <pre>{{ varer }}</pre>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="tablesort" ng-click="changeSort('navn')"><i id="o_10"
+                                                                                   ng-class="'fa fa-sort'+sortStatus('navn')"></i>Navn
+                            </th>
+                            <th class="tablesort" ng-click="changeSort('kategori')"><i id="o_8"
+                                                                                       ng-class="'fa fa-sort'+sortStatus('kategori')"></i>Kategori
+                            </th>
+                            <th class="tablesort" ng-click="changeSort('pris')"><i id="o_6"
+                                                                                   ng-class="'fa fa-sort'+sortStatus('pris')"></i>Pris
+                            </th>
+                            <th class="tablesort" ng-click="changeSort('volum')"><i id="o_4"
+                                                                                    ng-class="'fa fa-sort'+sortStatus('volum')"></i>Volum
+                            </th>
+                            <th class="tablesort" ng-click="changeSort('alkohol')"><i id="o_2"
+                                                                                      ng-class="'fa fa-sort'+sortStatus('alkohol')"></i>Alkohol
+                            </th>
+                            <th class="tablesort" ng-click="changeSort('alkoholpris')"><i id="o_0"
+                                                                                          ng-class="'fa fa-sort'+sortStatus('alkoholpris')"></i>Alkoholpris
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="vare in varer | bolFilter:varefilter | orderBy:varefilter.sortering"
+                            ng-click="systembolaget(vare.url)" class="vare">
+                            <td class="varenavn-td">{{ vare.navn }}</td>
+                            <td class="varetype-td">{{ vare.kategori }}</td>
+                            <td class="pris-td">{{ vare.pris | number:2 }}SEK</td>
+                            <td class="volum-td">{{ vare.volum | number:2 }}cl</td>
+                            <td class="alkohol-td">{{ vare.alkohol | number:2 }}%</td>
+                            <td class="enhetspris-td">{{ vare.alkoholpris | number:2 }}kr/cl</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+{% endverbatim angular %}
+</body>
+</html>

@@ -1,4 +1,4 @@
-from models import Produkter
+from models import Produkter, BolItems
 from rest_framework import serializers
 
 
@@ -14,3 +14,9 @@ class ProduktSerializer(serializers.HyperlinkedModelSerializer):
             'alkohol',
             'enhetspris',
         )
+
+
+class BolSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = BolItems

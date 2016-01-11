@@ -1,8 +1,7 @@
 # coding=utf-8
-import string
-import urllib
 import xml.etree.ElementTree as ET
-import unicodedata
+
+import json
 from django.utils.text import slugify
 
 rawTree = ET.parse('bol-raw.xml')
@@ -47,6 +46,9 @@ urlGroupDict = {
     u'Öv': 'aperitif-dessert',
     u'Gl': 'aperitif-dessert',
     u'Gi': 'sprit',
+    u'Sp': 'sprit',
+    u'Ge': 'sprit',
+    u'Mj': 'aperitif-dessert',
 }
 
 for i, oldItem in enumerate(root):
@@ -56,39 +58,44 @@ for i, oldItem in enumerate(root):
     item = ET.SubElement(items, 'row')
 
     nr = ET.SubElement(item, 'field', {'name': 'nr'})
-    name = ET.SubElement(item, 'field', {'name': 'name'})
-    group = ET.SubElement(item, 'field', {'name': 'group'})
-    producer = ET.SubElement(item, 'field', {'name': 'producer'})
-    country = ET.SubElement(item, 'field', {'name': 'country'})
-    price = ET.SubElement(item, 'field', {'name': 'price'})
-    volume = ET.SubElement(item, 'field', {'name': 'volume'})
-    alcohol = ET.SubElement(item, 'field', {'name': 'alcohol'})
-    alcoholPrice = ET.SubElement(item, 'field', {'name': 'alcoholPrice'})
+    navn = ET.SubElement(item, 'field', {'name': 'navn'})
+    beskrivelse = ET.SubElement(item, 'field', {'name': 'beskrivelse'})
+    kategori = ET.SubElement(item, 'field', {'name': 'kategori'})
+    produsent = ET.SubElement(item, 'field', {'name': 'produsent'})
+    land = ET.SubElement(item, 'field', {'name': 'land'})
+    pris = ET.SubElement(item, 'field', {'name': 'pris'})
+    volum = ET.SubElement(item, 'field', {'name': 'volum'})
+    alkohol = ET.SubElement(item, 'field', {'name': 'alkohol'})
+    alkoholpris = ET.SubElement(item, 'field', {'name': 'alkoholpris'})
     url = ET.SubElement(item, 'field', {'name': 'url'})
 
     nr.text = oldItem.find('nr').text if oldItem.find('nr') is not None else ''
-    name.text = oldItem.find('Namn').text if oldItem.find('Namn') is not None else ''
-    group.text = oldItem.find('Varugrupp').text if oldItem.find('Varugrupp') is not None else ''
-    producer.text = oldItem.find('Producent').text if oldItem.find('Producent') is not None else ''
-    country.text = oldItem.find('Ursprunglandnamn').text if oldItem.find('Ursprunglandnamn') is not None else ''
-    price.text = oldItem.find('Prisinklmoms').text if oldItem.find('Prisinklmoms') is not None else ''
-    volume.text = oldItem.find('Volymiml').text if oldItem.find('Volymiml') is not None else ''
-    alcohol.text = oldItem.find('Alkoholhalt').text if oldItem.find('Alkoholhalt') is not None else ''
+    navn.text = oldItem.find('Namn').text if oldItem.find('Namn') is not None else ''
+    beskrivelse.text = oldItem.find('Varugrupp').text if oldItem.find('Varugrupp') is not None else ''
+    produsent.text = oldItem.find('Producent').text if oldItem.find('Producent') is not None else ''
+    land.text = oldItem.find('Ursprunglandnamn').text if oldItem.find('Ursprunglandnamn') is not None else ''
+    pris.text = oldItem.find('Prisinklmoms').text if oldItem.find('Prisinklmoms') is not None else ''
+    volum.text = oldItem.find('Volymiml').text if oldItem.find('Volymiml') is not None else ''
+    alkohol.text = oldItem.find('Alkoholhalt').text if oldItem.find('Alkoholhalt') is not None else ''
 
-    volume.text = '{0:.1f}'.format(float(volume.text) / 10)
-    groupText = group.text
-    if groupText[:1] == 'sm':
-        if groupText[-1] == 't':
-            urlGroup = 'sprit'
+    volum.text = '{0:.1f}'.format(float(volum.text) / 10)
+    beskrivelsestekst = beskrivelse.text
+    if beskrivelsestekst[:1] == 'sm':
+        if beskrivelsestekst[-1] == 't':
+            kategoritekst = 'sprit'
         else:
-            urlGroup = 'aperitif-dessert'
+            kategoritekst = 'aperitif-dessert'
+    elif beskrivelsestekst[:2] == 'ros':
+        kategoritekst = 'roseviner'
     else:
-        urlGroup = urlGroupDict[unicode(groupText[:2])]
-    url.text = urlGroup + '/' + slugify(unicode(name.text.replace(' ', '-').lower())) + '-' + nr.text
+        kategoritekst = urlGroupDict[unicode(beskrivelsestekst[:2])]
+    url.text = kategoritekst + '/' + slugify(unicode(navn.text.replace(' ', '-').lower())) + '-' + nr.text
 
-    alcoholValue = float(alcohol.text)
-    alcoholPrice.text = '{0:.2f}'.format(
-        float(oldItem.find('PrisPerLiter').text) / alcoholValue if alcoholValue > 0 else 9000.01)
+    kategori.text = kategoritekst
+
+    alcoholValue = float(alkohol.text)
+    alkoholpris.text = '{0:.2f}'.format(
+            float(oldItem.find('PrisPerLiter').text) / alcoholValue if alcoholValue > 0 else 9000.01)
 
 tree = ET.ElementTree(items)
 tree.write('bol.xml', 'utf-8')

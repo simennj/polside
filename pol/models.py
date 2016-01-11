@@ -20,18 +20,58 @@ class Butikkategorilookup(Lookup):
 
 class BolItems(models.Model):
     nr = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=50)
-    group = models.CharField(max_length=36, blank=True, null=True)
-    producer = models.CharField(max_length=71, blank=True, null=True)
-    country = models.CharField(max_length=23, blank=True, null=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
-    volume = models.DecimalField(max_digits=5, decimal_places=1)
-    alcohol = models.DecimalField(max_digits=4, decimal_places=2)
-    alcoholPrice = models.DecimalField(max_digits=6, decimal_places=2)
+    navn = models.CharField(max_length=50)
+    beskrivelse = models.CharField(max_length=36, blank=True, null=True)
+    kategori = models.CharField(max_length=22)
+    produsent = models.CharField(max_length=71, blank=True, null=True)
+    land = models.CharField(max_length=23, blank=True, null=True)
+    pris = models.DecimalField(max_digits=7, decimal_places=2)
+    volum = models.DecimalField(max_digits=5, decimal_places=1)
+    alkohol = models.DecimalField(max_digits=4, decimal_places=2)
+    alkoholpris = models.DecimalField(max_digits=6, decimal_places=2)
     url = models.CharField(max_length=100)
 
 
-#class PolItems(models.Model):
+class BolFilter(django_filters.FilterSet):
+    groups = (
+        ('ol', 'ol'),
+        ('sprit', 'sprit'),
+        ('aperitif-dessert', 'aperitif-dessert'),
+        ('mousserande-viner', 'mousserande-viner'),
+        ('roda-viner', 'roda-viner'),
+        ('cider-och-blanddrycker', 'cider-och-blanddrycker'),
+        ('vita-viner', 'vita-viner'),
+        ('alkoholfritt', 'alkoholfritt'),
+    )
+
+    navn = django_filters.MultipleChoiceFilter(choices=groups)
+    kategori = django_filters.CharFilter(lookup_type='icontains')
+    produsent = django_filters.CharFilter(lookup_type='icontains')
+    land = django_filters.CharFilter(lookup_type='icontains')
+    pris = django_filters.RangeFilter()
+    volum = django_filters.RangeFilter()
+    alkohol = django_filters.RangeFilter()
+    alkoholpris = django_filters.RangeFilter()
+
+    class Meta:
+        model = BolItems
+        order_by = (
+            'alkoholpris',
+            '-alkoholpris',
+            'navn',
+            '-navn',
+            'kategori',
+            '-kategori',
+            'pris',
+            '-pris',
+            'volum',
+            '-volum',
+            'alkohol',
+            '-alkohol',
+        )
+
+
+# class PolItems(models.Model):
 #    nr = models.IntegerField(primary_key=True)
 #    name = models.CharField(max_length=80)
 #    group = models.CharField(max_length=40, blank=True, null=True)
@@ -170,8 +210,7 @@ class ProduktFilter(django_filters.FilterSet):
             '-alkohol',
         )
 
-
-#class Butikker(models.Model):
+# class Butikker(models.Model):
 #    datotid = models.CharField(db_column='Datotid', max_length=19, blank=True, null=True)
 #    butikknavn = models.CharField(db_column='Butikknavn', max_length=31, blank=True, null=True)
 #    gateadresse = models.CharField(db_column='Gateadresse', max_length=37, blank=True, null=True)

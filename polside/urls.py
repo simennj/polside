@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/$', views.TestViewSet.as_view()),
+    url(r'^bolrest/$', views.BolRestView.as_view()),
 ]

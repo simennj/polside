@@ -207,3 +207,7 @@
     }
 
 }
+
+[ng-click] {
+  cursor: pointer;
+}

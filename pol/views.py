@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 
 from pol.forms import *
 from pol.models import *
-from pol.serializers import ProduktSerializer
+from pol.serializers import ProduktSerializer, BolSerializer
 
 
 def liste(request):
@@ -40,6 +40,10 @@ def liste(request):
         'produsentform': produsent,
         'side': side
     })
+
+
+def bol(request):
+    return render_to_response('bol.html', {})
 
 
 def table(request):
@@ -78,6 +82,14 @@ class TestViewSet(generics.ListAPIView):#TODO: page eller side?
 #            produkter = paginator.page(paginator.num_pages)
 #        serializer = ProduktSerializer(produkter, many=True)
 #        return Response(serializer.data)
+
+
+class BolRestView(generics.ListAPIView):
+    queryset = BolItems.objects.all()
+    serializer = BolSerializer
+    serializer_class = serializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = BolFilter
 
 
 class Produktside(generic.DetailView):

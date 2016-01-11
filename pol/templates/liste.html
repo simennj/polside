@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/bootstrap-select.min.css" %}">
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css">
+{% endblock css %}
 {% block sidebar %}
     <form class="filterform">
         <div class="input-group"><span class="input-group-addon form-label-name">Varenavn</span>{{ varenavnform }}</div>
@@ -46,4 +51,7 @@
     <div id="table"></div>
 {% endblock content %}
 {% block scripts %}
+<script async src="{% static "js/bootstrap-select.min.js" %}"></script>
+<script async src="{% static "js/main.js" %}"></script>
+<script async src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
 {% endblock scripts %}
