@@ -6,7 +6,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.liste),
-    url(r'^bol/$', views.bol),
     url(u'^åre/$', views.bol),
     url(r'^liste/$', RedirectView.as_view(url='/', permanent=False)),
     # url(r'^(?P<x>[0-9]+)/$', views.topX, name='topX'),
