@@ -18,10 +18,8 @@
         });
         $scope.varefilter = $location.search();
         if ($scope.varefilter.kategori && !Array.isArray($scope.varefilter.kategori))$scope.varefilter.kategori = [$scope.varefilter.kategori];
+        if (!$scope.varefilter.sortering) $scope.varefilter.sortering = "alkoholpris";
 
-        $scope.$on('$locationChangeSuccess', function (event, newUrl, oldUrl) {
-            $scope.sort = $location.search()['sortering'];
-        });
         $scope.$watch('varefilter', function (newValue, oldValue) {
             $location.search(newValue);
         }, true);
@@ -31,9 +29,8 @@
             else $scope.varefilter.sortering = value;
         };
         $scope.sortStatus = function (value) {
-            var sortering = (($scope.varefilter.sortering && $scope.varefilter.sortering.length > 1) ? $scope.varefilter.sortering : "alkoholpris");
-            if (sortering === value) return '-asc';
-            if (sortering.substring(1) === value) return '-desc';
+            if ($scope.varefilter.sortering === value) return '-asc';
+            if ($scope.varefilter.sortering.substring(1) === value) return '-desc';
             return '';
         };
 
