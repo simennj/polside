@@ -211,3 +211,9 @@
 [ng-click] {
   cursor: pointer;
 }
+
+#kategorier {
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
