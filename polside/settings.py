@@ -86,12 +86,8 @@ WSGI_APPLICATION = 'polside.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'simennje_pol',
-        'USER': 'simennje_en',
-        'PASSWORD': 'aldri_mer_PHP',
-        'HOST': 'mysql.stud.ntnu.no',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, '../db.sqlite3'),
     }
 }
 
